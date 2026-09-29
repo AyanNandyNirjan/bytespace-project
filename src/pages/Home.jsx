@@ -32,48 +32,61 @@ const pathCards = [
   { icon: Camera01Icon, label: 'Photography' }
 ]
 
+const homeCategories = [
+  'Featured',
+  'Music',
+  'Drawing & Painting',
+  'Marketing',
+  'Animation',
+  'Social Media',
+  'UI/UX Design',
+  'Creative Marketing',
+  'Cooking',
+  'Financial Literacy',
+  'Web Design',
+  'Sports',
+  'Freelance & Entrepreneurship',
+  'Photography',
+  'Film Making',
+  'Productivity',
+  'Game Development',
+  'Learn Python',
+  'Security',
+  '+ More'
+]
+
+const brandLogos = [
+  { src: '/assets/logoipsum_1_waves.png', srcSet: '/assets/logoipsum_1_waves@2x.png 2x', alt: 'Logoipsum' },
+  { src: '/assets/logoipsum_2_sunburst.png', srcSet: '/assets/logoipsum_2_sunburst@2x.png 2x', alt: 'Logoipsum' },
+  { src: '/assets/logoipsum_3_bolt.png', srcSet: '/assets/logoipsum_3_bolt@2x.png 2x', alt: 'Logoipsum' },
+  { src: '/assets/logoipsum_4_flower.png', srcSet: '/assets/logoipsum_4_flower@2x.png 2x', alt: 'Logoipsum' },
+  { src: '/assets/logoipsum_5_rings.png', srcSet: '/assets/logoipsum_5_rings@2x.png 2x', alt: 'Logoipsum' },
+]
+
 export default function Home() {
   const navigate = useNavigate()
   const [activeCategory, setActiveCategory] = useState('Featured')
-
-  const homeCategories = [
-    'Featured',
-    'Music',
-    'Drawing & Painting',
-    'Marketing',
-    'Animation',
-    'Social Media',
-    'UI/UX Design',
-    'Creative Marketing',
-    'Cooking',
-    'Financial Literacy',
-    'Web Design',
-    'Sports',
-    'Freelance & Entrepreneurship',
-    'Photography',
-    'Film Making',
-    'Productivity',
-    'Game Development',
-    'User Python',
-    'Security',
-    '+ More'
-  ]
 
   return (
     <div className="min-h-screen bg-white text-ink">
       {/* 1. HERO SECTION */}
       <HomeHero />
 
-      {/* 2. PARTNER LOGO STRIP */}
-      <section className="border-b border-black/5 bg-[#F7F8F9] py-7">
-        <div className="container-page flex flex-wrap items-center justify-around gap-6 text-center text-xs font-semibold text-[#6C7280] sm:gap-10 sm:text-sm">
-          {['Logipsum', 'Logipsum', 'Logipsum', 'Logipsum', 'Logipsum'].map((item, i) => (
-            <div key={i} className="flex items-center gap-2 opacity-80 transition-opacity hover:opacity-100">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="9" />
-                <circle cx="12" cy="12" r="3" fill="currentColor" />
-              </svg>
-              <span className="tracking-tight text-gray-700">{item}</span>
+      {/* 2. PARTNER LOGO STRIP (Exact Figma Logoipsum Component) */}
+      <section className="border-b border-black/5 bg-[#F5F5F6] py-8 sm:py-9">
+        <div className="container-page flex flex-wrap items-center justify-center gap-8 sm:justify-between sm:gap-10 lg:gap-14">
+          {brandLogos.map((logo, i) => (
+            <div
+              key={i}
+              className="flex items-center justify-center opacity-85 transition-all duration-200 hover:opacity-100 hover:scale-105"
+            >
+              <img
+                src={logo.src}
+                srcSet={logo.srcSet}
+                alt={logo.alt}
+                className="h-6 sm:h-[26px] lg:h-[28px] w-auto object-contain select-none"
+                draggable={false}
+              />
             </div>
           ))}
         </div>
@@ -95,12 +108,17 @@ export default function Home() {
           </div>
 
           {/* Category Chips (3 Rows) */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:mt-10 sm:gap-2.5">
+          <div className="mx-auto mt-8 flex max-w-4xl flex-wrap items-center justify-center gap-2 sm:mt-10 sm:gap-2.5">
             {homeCategories.map(cat => (
               <CategoryChip
                 key={cat}
                 active={activeCategory === cat}
                 onClick={() => {
+                  if (cat === '+ More') {
+                    navigate('/courses')
+                    toast.success('Browsing all categories')
+                    return
+                  }
                   setActiveCategory(cat)
                   toast.success(`Filter: ${cat}`)
                 }}
@@ -168,7 +186,7 @@ export default function Home() {
                 Growth Starts Here!
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base sm:leading-7">
-                ByteSpace is your key to unlocking endless potential. Whether you're seeking to advance your current career, pivot to a new field, or simply satisfy your thirst for knowledge, our platform offers a transformative learning experience.
+                Explore our curated selection of courses tailored to enhance your capabilities and accelerate your career journey. Whether you are looking to sharpen specific skills, gain industry expertise, or embark on a new career path entirely, we have the resources you need.
               </p>
 
               {/* Stats Numbers */}
@@ -188,52 +206,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Visual Art with Layered Overlays */}
+            {/* Right Visual Art */}
             <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center select-none lg:mx-0">
-              {/* Central Student with Headphones */}
               <img
-                src="/assets/student_cutout_clean.png"
-                alt="Student learning"
-                className="relative z-10 w-[300px] object-contain sm:w-[360px]"
-                draggable={false}
-              />
-
-              {/* Background Card: Learn Figma from Basic */}
-              <div className="absolute -left-2 top-4 z-0 w-[200px] rounded-[18px] border border-gray-100 bg-white p-2.5 shadow-[0_16px_36px_rgba(7,18,67,0.12)] sm:left-2 sm:w-[220px]">
-                <img
-                  src="/assets/course-figma.jpg"
-                  alt=""
-                  className="aspect-[1.8/1] w-full rounded-xl object-cover"
-                />
-                <p className="mt-2 text-xs font-bold text-ink truncate">Learn Figma from Basic</p>
-                <div className="mt-1 flex items-center justify-between">
-                  <span className="rounded-full bg-[#F3F4F6] px-2 py-0.5 text-[9px] text-[#555]">
-                    Beginner
-                  </span>
-                  <span className="text-[10px] text-gray-500">4.5 ★</span>
-                </div>
-              </div>
-
-              {/* Foreground Card: Learning Progress 55% */}
-              <motion.div
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -right-2 top-28 z-20 w-[170px] rounded-[18px] bg-white p-3.5 shadow-[0_16px_36px_rgba(7,18,67,0.14)] sm:right-2 sm:w-[190px]"
-              >
-                <p className="text-[11px] font-medium text-muted">Learning Progress</p>
-                <p className="mt-1 text-2xl font-extrabold text-ink leading-none">55%</p>
-                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[#EAECEF]">
-                  <div className="h-full w-[55%] rounded-full bg-lime" />
-                </div>
-              </motion.div>
-
-              {/* Lime Squiggle Graphic */}
-              <motion.img
-                animate={{ y: [0, 6, 0], rotate: [0, 4, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                src="/assets/hero_shape_lime_squiggle.png"
-                alt=""
-                className="pointer-events-none absolute -right-6 bottom-8 z-20 h-24 w-24 object-contain sm:h-28 sm:w-28"
+                src="/assets/feature_growth_composite.png"
+                alt="Your Path to Professional Growth Starts Here"
+                className="relative z-10 w-full max-w-[430px] object-contain drop-shadow-[0_20px_40px_rgba(7,18,67,0.10)] transition-transform duration-300 hover:scale-[1.02]"
                 draggable={false}
               />
             </div>
@@ -242,52 +220,15 @@ export default function Home() {
       </MotionSection>
 
       {/* 6. CREATE & MANAGE COURSES EASILY SECTION */}
-      <MotionSection className="py-16 sm:py-20 lg:py-24">
+      <MotionSection className="relative overflow-hidden bg-gradient-to-tr from-[#FEFFE8]/40 via-white to-[#EBF0FF]/40 py-16 sm:py-20 lg:py-24">
         <div className="container-page">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left Visual: Creator with Tablet & UI Overlays */}
             <div className="relative order-2 mx-auto flex w-full max-w-[460px] items-center justify-center select-none lg:order-1 lg:mx-0">
               <img
-                src="/assets/feature-create.jpg"
-                alt="Course Creator"
-                className="relative z-10 max-h-[440px] w-full max-w-[380px] rounded-[28px] object-cover shadow-[0_20px_50px_rgba(7,18,67,0.15)]"
-                draggable={false}
-              />
-
-              {/* UI Overlay 1: Earnings Pill ($1,200.00) */}
-              <div className="absolute -left-2 top-6 z-20 rounded-[18px] bg-[#002FB6] p-3 text-white shadow-xl sm:left-0">
-                <p className="text-[10px] text-white/70">Course Revenue</p>
-                <p className="text-base font-extrabold sm:text-lg">$1,200.00</p>
-                <div className="mt-1.5 h-1.5 w-24 rounded-full bg-white/20">
-                  <div className="h-full w-3/4 rounded-full bg-lime" />
-                </div>
-              </div>
-
-              {/* UI Overlay 2: Balance Pill ($5,110.65) */}
-              <div className="absolute -left-4 bottom-24 z-20 rounded-[18px] bg-[#002FB6] p-3 text-white shadow-xl sm:-left-2">
-                <p className="text-[10px] text-white/70">Total Balance</p>
-                <p className="text-base font-extrabold sm:text-lg">$5,110.65</p>
-                <span className="mt-1 inline-block rounded-full bg-lime px-2 py-0.5 text-[9px] font-bold text-black">
-                  +18.4%
-                </span>
-              </div>
-
-              {/* UI Overlay 3: Happy Students */}
-              <div className="absolute -right-3 bottom-12 z-20 flex w-[210px] items-center justify-between rounded-[18px] bg-white p-3 shadow-2xl sm:right-0">
-                <div>
-                  <p className="text-xs font-bold text-ink">Happy Students</p>
-                  <p className="text-[10px] text-[#FBBF24]">4.8 ★★★★★</p>
-                </div>
-                <AvatarStack count="2K+" />
-              </div>
-
-              {/* Lime Squiggle */}
-              <motion.img
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                src="/assets/hero_shape_lime_squiggle.png"
-                alt=""
-                className="pointer-events-none absolute -right-6 top-10 z-20 h-24 w-24 object-contain"
+                src="/assets/feature_manage_composite.png"
+                alt="Create & Manage Courses Easily"
+                className="relative z-10 w-full max-w-[420px] object-contain drop-shadow-[0_20px_40px_rgba(7,18,67,0.10)] transition-transform duration-300 hover:scale-[1.02]"
                 draggable={false}
               />
             </div>
@@ -300,20 +241,20 @@ export default function Home() {
                 Courses Easily.
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base sm:leading-7">
-                ByteSpace gives creators intuitive tools to publish, organize and improve learning experiences without unnecessary complexity. Share your passion, build your student community, and generate sustainable income.
+                ByteSpace supports individuals or entities in the creation, publication, and administration of educational courses.
               </p>
 
               {/* Bullet Points with Blue Circle Checkmarks */}
               <div className="mt-8 space-y-4">
                 {[
-                  'Effortless Course Creation',
-                  'Interactive Quizzes and Assignments',
-                  'Seamless Video Hosting',
-                  'Dedicated Instructor Support'
+                  'Share Your Expertise',
+                  'Monetize Your Passion',
+                  'Flexibility and Autonomy',
+                  'Build a Community'
                 ].map(item => (
                   <div key={item} className="flex items-center gap-3">
-                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#003be2] text-white">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1B59F8] text-white sm:h-6 sm:w-6 shadow-sm">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
@@ -355,60 +296,81 @@ export default function Home() {
       </BlueGridBackground>
 
       {/* 8. TESTIMONIALS SECTION */}
-      <MotionSection className="relative overflow-hidden bg-gradient-to-br from-[#FEFFE8]/50 via-white to-[#EBF0FF]/40 py-16 sm:py-20 lg:py-24">
-        <div className="container-page">
+      <MotionSection className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28">
+        {/* Visible Ambient Background Glows Matching Design Reference */}
+        {/* 1. Large Vibrant Yellow / Lime Glow (Top-Right / Center) */}
+        <div
+          className="pointer-events-none absolute -top-28 right-0 h-[520px] w-[620px] rounded-full bg-[#D4FF00]/45 blur-[100px] lg:-top-32 lg:right-6 lg:h-[600px] lg:w-[720px] lg:bg-[#D4FF00]/50"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -top-16 left-1/3 h-[400px] w-[460px] rounded-full bg-[#E5FF4D]/35 blur-[90px]"
+          aria-hidden="true"
+        />
+        {/* 2. Soft Periwinkle Blue Glow (Bottom-Left) */}
+        <div
+          className="pointer-events-none absolute -bottom-24 -left-20 h-[440px] w-[480px] rounded-full bg-[#9BB6FF]/40 blur-[95px]"
+          aria-hidden="true"
+        />
+
+        <div className="container-page relative z-10">
           {/* Header Row */}
           <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:items-end">
-            <h2 className="text-3xl font-extrabold leading-tight tracking-[-0.035em] text-ink sm:text-4xl lg:text-[44px]">
+            <h2 className="text-3xl font-extrabold leading-[1.15] tracking-[-0.035em] text-ink sm:text-4xl lg:text-[44px]">
               Discover What Our
               <br />
               Community Is Saying
             </h2>
-            <p className="text-sm leading-relaxed text-muted sm:text-base sm:leading-7">
-              At ByteSpace, our mission is to empower individuals to achieve their full potential through accessible, high-quality online education. But don't just take our word for it. Read the real stories and testimonials from students and creators whose lives have been transformed.
+            <p className="text-sm leading-relaxed text-[#555A64] sm:text-base sm:leading-7">
+              At ByteSpace, our vibrant community of learners and creators is at the heart of what we do. Hear directly from those who have experienced the transformative journey of learning and creating on our platform. Explore testimonials that reflect the diverse perspectives of enthusiastic learners and accomplished creators.
             </p>
           </div>
 
           {/* 3 Testimonial Cards */}
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:gap-7">
             {[
               {
-                avatar: '/assets/avatar-sarah.jpg',
+                avatar: '/assets/avatar_sarah_circle.png',
+                avatar2x: '/assets/avatar_sarah_circle@2x.png',
                 name: 'Sarah M.',
-                role: 'UI Designer',
+                role: 'Enthusiastic Learner',
                 quote:
-                  'ByteSpace has made learning feel flexible and approachable. The course structure is clean, practical and easy to follow. It completely changed the way I build designs.'
+                  '"ByteSpace has transformed my approach to learning. The diverse range of courses and the quality of content provided by creators have exceeded my expectations. The platform truly fosters a sense of community and lifelong learning."'
               },
               {
-                avatar: '/assets/avatar-james.jpg',
+                avatar: '/assets/avatar_james_circle.png',
+                avatar2x: '/assets/avatar_james_circle@2x.png',
                 name: 'James L.',
-                role: 'Web Developer',
+                role: 'Lifelong Learner',
                 quote:
-                  'The lessons are practical enough to apply right away. I especially like the way topics are broken down step-by-step with real code examples and mentors.'
+                  '"I\'ve tried several online learning platforms, and ByteSpace stands out for its vibrant community and the variety of courses available. The easy navigation and engaging content make it a go-to platform for continuous skill development."'
               },
               {
-                avatar: '/assets/avatar-alex.jpg',
-                name: 'Alex D.',
-                role: 'Product Designer',
+                avatar: '/assets/avatar_alex_circle.png',
+                avatar2x: '/assets/avatar_alex_circle@2x.png',
+                name: 'Alex B.',
+                role: 'Inspired Creator',
                 quote:
-                  'The creator-focused approach makes this platform feel modern, useful and built around real growth. The community support is outstanding!'
+                  '"As a creator, ByteSpace has been a game-changer for me. The Course Editor is user-friendly, and the support from the community is incredible. It\'s fulfilling to see my courses making a positive impact on learners globally."'
               }
-            ].map(({ avatar, name, role, quote }) => (
+            ].map(({ avatar, avatar2x, name, role, quote }) => (
               <motion.div
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 key={name}
-                className="flex flex-col justify-between rounded-[24px] border border-gray-100 bg-white p-6 shadow-[0_8px_30px_rgba(7,18,67,0.04)] sm:p-7"
+                className="flex flex-col justify-between rounded-[28px] border border-gray-100/90 bg-white p-7 shadow-[0_16px_40px_rgba(7,18,67,0.06)] sm:rounded-[32px] sm:p-8"
               >
                 <div>
                   <img
                     src={avatar}
+                    srcSet={avatar2x ? `${avatar2x} 2x` : undefined}
                     alt={name}
-                    className="h-12 w-12 rounded-full object-cover shadow-sm"
+                    className="h-14 w-14 rounded-full object-cover select-none sm:h-16 sm:w-16"
+                    draggable={false}
                   />
-                  <p className="mt-4 text-base font-bold text-ink">{name}</p>
-                  <p className="text-xs font-semibold text-brand">{role}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-[#4B5563]">"{quote}"</p>
+                  <p className="mt-5 text-[17px] font-bold text-ink sm:text-[18px]">{name}</p>
+                  <p className="mt-0.5 text-xs font-semibold text-[#1B59F8] sm:text-sm">{role}</p>
+                  <p className="mt-4 text-xs leading-relaxed text-[#4B5563] sm:text-[13.5px] sm:leading-6">{quote}</p>
                 </div>
               </motion.div>
             ))}

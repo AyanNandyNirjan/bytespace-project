@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { margin: 0; background: transparent; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="./three.min.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const shapeType = urlParams.get('shape') || 'lime_cylinder';
+
+    const width = 800, height = 800;
+    const scene = new THREE.Scene();
+    
+    // Orthographic camera for clean 3D isometric view without perspective distortion
+    const frustum = 3.8;
+    const camera = new THREE.OrthographicCamera(
+      -frustum / 2, frustum / 2,
+      frustum / 2, -frustum / 2,
+      0.1, 100
+    );
+    camera.position.set(0, 0, 10);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, preserveDrawingBuffer: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(2);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    document.getElementById('container').appendChild(renderer.domElement);
+
+    // Studio 3-point lighting setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.35);
+    keyLight.position.set(5, 7, 8);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xccff00, 0.4);
+    fillLight.position.set(-6, -2, 5);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    rimLight.position.set(-2, 6, -5);
+    scene.add(rimLight);
+
+    // Vibrant Neon Lime Plastic Material (#D2FF00) matching Figma
+    const limeMaterial = new THREE.MeshStandardMaterial({
+      color: 0xD0FF00,
+      roughness: 0.26,
+      metalness: 0.02,
+      emissive: 0x223300,
+    });
+
+    // Pristine Matte White Material
+    const whiteMaterial = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.32,
+      metalness: 0.01,
+    });
+
+    // Custom 3D Helix / Spring Curve
+    class SpringCurve extends THREE.Curve {
+      constructor(radiusX, radiusZ, height, turns, startAngle = 0) {
+        super();
+        this.radiusX = radiusX;
+        this.radiusZ = radiusZ;
+        this.height = height;
+        this.turns = turns;
+        this.startAngle = startAngle;
+      }
+      getPoint(t) {
+        const angle = this.startAngle + t * Math.PI * 2 * this.turns;
+        const x = Math.cos(angle) * this.radiusX;
+        const y = (0.5 - t) * this.height;
+        const z = Math.sin(angle) * this.radiusZ;
+        return new THREE.Vector3(x, y, z);
+      }
+    }
+
+    // Helper to create spring with rounded spherical end caps
+    function createSpringMesh(radiusX, radiusZ, height, turns, tubeRadius, material, startAngle = 0) {
+      const group = new THREE.Group();
+      const curve = new SpringCurve(radiusX, radiusZ, height, turns, startAngle);
+      const tubeGeom = new THREE.TubeGeometry(curve, 260, tubeRadius, 36, false);
+      const tubeMesh = new THREE.Mesh(tubeGeom, material);
+      group.add(tubeMesh);
+
+      const sphereGeom = new THREE.SphereGeometry(tubeRadius * 0.98, 36, 36);
+      
+      const capStart = new THREE.Mesh(sphereGeom, material);
+      const t0 = curve.getTangent(0);
+      capStart.position.copy(curve.getPoint(0)).addScaledVector(t0, -tubeRadius * 0.05);
+      group.add(capStart);
+
+      const capEnd = new THREE.Mesh(sphereGeom, material);
+      const t1 = curve.getTangent(1);
+      capEnd.position.copy(curve.getPoint(1)).addScaledVector(t1, tubeRadius * 0.05);
+      group.add(capEnd);
+
+      return group;
+    }
+
+    if (shapeType === 'lime_cylinder') {
+      // 1. Complete Lime Truncated Cone / Cylinder (top-right)
+      // Reference: top circular face tilted towards viewer, body tapers down, leaning down-right
+      const group = new THREE.Group();
+      
+      const geom = new THREE.CylinderGeometry(0.84, 0.58, 2.05, 96, 1, false);
+      const cylinder = new THREE.Mesh(geom, limeMaterial);
+      group.add(cylinder);
+
+      // Smooth beveled caps
+      const topTorusGeom = new THREE.TorusGeometry(0.81, 0.035, 32, 96);
+      const topTorus = new THREE.Mesh(topTorusGeom, limeMaterial);
+      topTorus.rotation.x = Math.PI / 2;
+      topTorus.position.y = 1.02;
+      group.add(topTorus);
+
+      const botTorusGeom = new THREE.TorusGeometry(0.55, 0.035, 32, 96);
+      const botTorus = new THREE.Mesh(botTorusGeom, limeMaterial);
+      botTorus.rotation.x = Math.PI / 2;
+      botTorus.position.y = -1.02;
+      group.add(botTorus);
+
+      // Tilt so top face is tilted towards viewer and body leans matching reference
+      group.rotation.x = 0.58;
+      group.rotation.z = 0.38;
+      group.rotation.y = -0.18;
+      scene.add(group);
+    } 
+    else if (shapeType === 'lime_squiggle') {
+      // 2. Complete Lime Coiled Spring / Squiggle (top-left)
+      // Reference: 3.2 turns, starts at top-right, smooth rounded loops on left and right
+      const spring = createSpringMesh(0.70, 0.44, 2.05, 3.2, 0.18, limeMaterial, -0.15);
+      spring.rotation.x = 0.18;
+      spring.rotation.z = 0.14;
+      spring.rotation.y = -0.12;
+      scene.add(spring);
+    }
+    else if (shapeType === 'white_squiggle') {
+      // 3. Complete White Squiggle / Zigzag Spring (left)
+      // Reference: 2.6 turns, compact, smooth white plastic tilted diagonally
+      const spring = createSpringMesh(0.58, 0.36, 1.5, 2.6, 0.165, whiteMaterial, Math.PI * 0.45);
+      spring.rotation.x = 0.20;
+      spring.rotation.z = -0.48;
+      spring.rotation.y = 0.32;
+      scene.add(spring);
+    }
+    else if (shapeType === 'white_ring') {
+      // 4. Complete White Torus Ring (bottom-left)
+      // Reference: Large white donut / torus tilted obliquely
+      const geom = new THREE.TorusGeometry(0.85, 0.26, 64, 128);
+      const torus = new THREE.Mesh(geom, whiteMaterial);
+      torus.rotation.x = 0.98;
+      torus.rotation.y = -0.38;
+      torus.rotation.z = 0.52;
+      scene.add(torus);
+    }
+    else if (shapeType === 'white_spiral') {
+      // 5. Complete White Spiral Helix (bottom-right)
+      // Reference: 3.4 turns, large white spring
+      const spring = createSpringMesh(0.76, 0.48, 2.05, 3.4, 0.18, whiteMaterial, Math.PI * 0.78);
+      spring.rotation.x = -0.14;
+      spring.rotation.z = -0.26;
+      spring.rotation.y = 0.42;
+      scene.add(spring);
+    }
+    else if (shapeType === 'white_triangle') {
+      // 6. Complete White Pyramid (right)
+      const geom = new THREE.ConeGeometry(0.85, 1.45, 3, 1, false);
+      const pyramid = new THREE.Mesh(geom, whiteMaterial);
+      pyramid.rotation.x = 0.42;
+      pyramid.rotation.y = 0.65;
+      pyramid.rotation.z = -0.35;
+      scene.add(pyramid);
+    }
+
+    renderer.render(scene, camera);
+    window.renderReady = true;
+  </script>
+</body>
+</html>
