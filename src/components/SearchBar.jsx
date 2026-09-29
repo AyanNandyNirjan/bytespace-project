@@ -82,7 +82,7 @@ export default function SearchBar({ compact = false, variant = 'hero', onSearch 
       className="flex w-full min-w-0 max-w-[580px] items-center justify-center gap-2 sm:gap-4"
     >
       {/* Search Input Pill */}
-      <div className="flex h-[46px] min-w-0 flex-1 items-center rounded-full bg-white px-3 shadow-[0_8px_25px_rgba(0,0,0,0.06)] transition-shadow duration-200 focus-within:shadow-[0_10px_30px_rgba(0,0,0,0.12)] sm:h-[52px] sm:flex-initial sm:w-[458px] sm:px-5">
+      <div className="flex h-[46px] min-w-0 flex-1 items-center rounded-full bg-white px-3 shadow-[0_8px_25px_rgba(0,0,0,0.08)] transition-all duration-200 focus-within:ring-4 focus-within:ring-lime/30 focus-within:shadow-[0_12px_32px_rgba(7,18,67,0.16)] sm:h-[52px] sm:flex-initial sm:w-[458px] sm:px-5">
         <HugeiconsIcon icon={Search01Icon} size={18} className="mr-2.5 text-[#8E95A2]" />
         <input
           name="search"
@@ -97,7 +97,7 @@ export default function SearchBar({ compact = false, variant = 'hero', onSearch 
       {/* Separate Lime Pill Button */}
       <button
         type="submit"
-        className="flex h-[44px] shrink-0 items-center justify-center rounded-full bg-lime px-4 text-xs font-bold text-black shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-transform duration-150 hover:scale-[1.03] active:scale-[0.97] sm:h-[50px] sm:w-[104px] sm:px-0 sm:text-[16px]"
+        className="flex h-[44px] shrink-0 items-center justify-center rounded-full bg-lime px-4 text-xs font-bold text-black shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-all duration-150 hover:brightness-105 hover:shadow-[0_10px_28px_rgba(199,255,0,0.3)] active:scale-[0.97] sm:h-[50px] sm:w-[104px] sm:px-0 sm:text-[16px]"
       >
         Search
       </button>

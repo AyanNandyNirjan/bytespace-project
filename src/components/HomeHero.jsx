@@ -48,11 +48,11 @@ export default function HomeHero() {
             <Header />
           </div>
 
-          {/* 1. Main Hero Heading (y = 185px target glyph start, two lines, centered) */}
+          {/* 1. Main Hero Heading (Smooth staggered entrance) */}
           <motion.h1
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-0 right-0 top-[175px] mx-auto w-[920px] text-center text-[72px] font-bold leading-[1.05] tracking-[-0.035em] text-white select-none"
           >
             Get Access to Hundreds
@@ -60,194 +60,187 @@ export default function HomeHero() {
             Courses Available
           </motion.h1>
 
-          {/* 2. Subtitle (y = 382px target glyph start, centered, single line) */}
+          {/* 2. Subtitle (Smooth staggered entrance) */}
           <motion.p
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.05 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-0 right-0 top-[376px] mx-auto w-[850px] text-center text-[17px] font-normal tracking-[0.01em] text-white/85 select-none"
           >
             Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
           </motion.p>
 
-          {/* 3. Search Bar (y = 463px target, centered, separate input and lime button) */}
+          {/* 3. Search Bar (Smooth scale and fade entrance) */}
           <motion.div
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
+            initial={{ opacity: 0, y: 16, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-0 right-0 top-[463px] z-20 mx-auto flex w-[580px] justify-center"
           >
             <SearchBar compact />
           </motion.div>
 
-          {/* 4. Central Green Semicircle (Apex around y = 585px, width = 1150px) */}
-          <div
-            className="pointer-events-none absolute left-0 right-0 top-[585px] z-0 mx-auto h-[1150px] w-[1150px] rounded-full bg-lime"
-            style={{ willChange: 'transform' }}
-          />
-
-          {/* 5. Main Central Student Image (Starts around y = 535px, bottom = 1024px) */}
+          {/* 4. Central Lime Arch (Official Figma Component) */}
           <motion.div
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="pointer-events-none absolute left-0 right-0 top-[535px] z-10 mx-auto w-[470px] select-none"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute left-[145px] top-[583px] z-0 w-[1150px] select-none"
+            style={{ willChange: 'transform' }}
           >
             <img
-              src="/assets/student_cutout_clean.png"
+              src="/assets/hero_lime_arch_official.png"
+              alt=""
+              className="block h-auto w-full object-contain drop-shadow-[0_20px_60px_rgba(199,255,0,0.2)]"
+              draggable={false}
+            />
+          </motion.div>
+
+          {/* 5. Main Central Student Image (Official Figma Component with baked shadow) */}
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute left-[378px] top-[516px] z-10 w-[728px] select-none"
+          >
+            <img
+              src="/assets/hero_student_official.png"
               alt="ByteSpace student learning online"
               className="block h-auto w-full object-contain"
               draggable={false}
             />
           </motion.div>
 
-          {/* 6. Left Decorative Shapes */}
-          {/* A: Large lime 3D squiggle (far left, y ≈ 285px) */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="pointer-events-none absolute -left-[10px] top-[285px] z-10 w-[215px] select-none"
-          >
+          {/* ========================================================
+              6. LEFT DECORATIVE SHAPES (GPU-Accelerated Compositor Floating)
+              Zero stutter, silky smooth 60fps/120fps locked motion
+              ======================================================== */}
+          {/* A: Complete lime 3D squiggle spring (far left, y ≈ 280px) */}
+          <div className="animate-float-1 pointer-events-none absolute left-[10px] top-[280px] z-10 w-[205px] select-none">
             <img
               src="/assets/hero_shape_lime_squiggle.png"
               alt=""
-              className="block h-auto w-full object-contain"
+              className="block h-auto w-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.22)]"
               draggable={false}
             />
-          </motion.div>
+          </div>
 
-          {/* B: Small white squiggle (left, x ≈ 215px, y ≈ 505px) */}
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 5.4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-            className="pointer-events-none absolute left-[215px] top-[505px] z-10 w-[95px] select-none"
-          >
+          {/* B: Complete small white squiggle (left, x ≈ 215px, y ≈ 505px) */}
+          <div className="animate-float-2 pointer-events-none absolute left-[215px] top-[505px] z-10 w-[105px] select-none">
             <img
               src="/assets/hero_shape_white_squiggle.png"
               alt=""
-              className="block h-auto w-full object-contain"
+              className="block h-auto w-full object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.20)]"
               draggable={false}
             />
-          </motion.div>
+          </div>
 
-          {/* C: Large white ring (far left, x ≈ 55px, y ≈ 735px) */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 7.0, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            className="pointer-events-none absolute left-[55px] top-[735px] z-10 w-[250px] select-none"
-          >
+          {/* C: Complete large white ring (far left, x ≈ 45px, y ≈ 730px) */}
+          <div className="animate-float-3 pointer-events-none absolute left-[45px] top-[730px] z-10 w-[240px] select-none">
             <img
               src="/assets/hero_shape_white_ring.png"
               alt=""
-              className="block h-auto w-full object-contain"
+              className="block h-auto w-full object-contain drop-shadow-[0_24px_45px_rgba(0,0,0,0.25)]"
               draggable={false}
             />
-          </motion.div>
+          </div>
 
-          {/* 7. Right Decorative Shapes */}
-          {/* D: Large lime cylinder (far right, x ≈ 1270px, y ≈ 250px) */}
-          <motion.div
-            animate={{ y: [0, -7, 0] }}
-            transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-            className="pointer-events-none absolute left-[1270px] top-[250px] z-10 w-[170px] select-none"
-          >
+          {/* ========================================================
+              7. RIGHT DECORATIVE SHAPES (GPU-Accelerated Compositor Floating)
+              Zero stutter, silky smooth 60fps/120fps locked motion
+              ======================================================== */}
+          {/* D: Complete large lime cylinder (far right, x ≈ 1235px, y ≈ 240px) */}
+          <div className="animate-float-4 pointer-events-none absolute left-[1235px] top-[240px] z-10 w-[190px] select-none">
             <img
               src="/assets/hero_shape_lime_cylinder.png"
               alt=""
-              className="block h-auto w-full object-contain"
+              className="block h-auto w-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.22)]"
               draggable={false}
             />
-          </motion.div>
+          </div>
 
-          {/* E: White triangular pyramid (right, x ≈ 1130px, y ≈ 480px) */}
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut', delay: 0.7 }}
-            className="pointer-events-none absolute left-[1130px] top-[480px] z-10 w-[130px] select-none"
-          >
+          {/* E: Complete white triangular pyramid (right, x ≈ 1130px, y ≈ 480px) */}
+          <div className="animate-float-5 pointer-events-none absolute left-[1130px] top-[480px] z-10 w-[130px] select-none">
             <img
               src="/assets/hero_shape_white_triangle.png"
               alt=""
-              className="block h-auto w-full object-contain"
+              className="block h-auto w-full object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.20)]"
               draggable={false}
             />
-          </motion.div>
+          </div>
 
-          {/* F: Large white spiral (far right, x ≈ 1195px, y ≈ 705px) */}
-          <motion.div
-            animate={{ y: [0, -7, 0] }}
-            transition={{ duration: 6.8, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
-            className="pointer-events-none absolute left-[1195px] top-[705px] z-10 w-[245px] select-none"
-          >
+          {/* F: Complete large white spiral (far right, x ≈ 1190px, y ≈ 705px) */}
+          <div className="animate-float-6 pointer-events-none absolute left-[1190px] top-[705px] z-10 w-[235px] select-none">
             <img
               src="/assets/hero_shape_white_spiral.png"
               alt=""
-              className="block h-auto w-full object-contain"
+              className="block h-auto w-full object-contain drop-shadow-[0_24px_45px_rgba(0,0,0,0.25)]"
               draggable={false}
             />
-          </motion.div>
+          </div>
 
-          {/* 8. Floating Cards (Positioned in front of student and lime circle) */}
-          {/* Card 1: UI/UX Design (x = 405px, y = 640px) */}
+          {/* ========================================================
+              8. OFFICIAL DESIGN COMPONENT CARDS (Exact Figma Components)
+              Smooth GPU-Accelerated Floating & Tactile Micro-Interactions
+              ======================================================== */}
+          {/* Card 1: UI/UX Design (x = 404px, y = 640px, w = 208px, h = 70px) */}
           <motion.div
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            whileHover={{ scale: 1.04, y: -2 }}
-            onClick={() => {
-              navigate('/courses')
-              toast.success('200 UI/UX Design courses available')
-            }}
-            className="absolute left-[405px] top-[640px] z-20 flex h-[68px] w-[205px] cursor-pointer flex-col justify-center rounded-[16px] bg-white px-4 py-3 shadow-[0_16px_36px_rgba(7,18,67,0.12)] transition-shadow hover:shadow-[0_20px_42px_rgba(7,18,67,0.18)]"
+            initial={{ opacity: 0, y: 25, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-[404px] top-[640px] z-20 cursor-pointer"
           >
-            <p className="text-[15px] font-bold text-[#111318]">UI/UX Design</p>
-            <p className="mt-0.5 text-[11px] font-medium text-[#6C7280]">
-              200 Courses &nbsp;•&nbsp; 1000+ Students
-            </p>
-          </motion.div>
-
-          {/* Card 2: Learning Progress (x = 843px, y = 652px) */}
-          <motion.div
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            whileHover={{ scale: 1.03, y: -2 }}
-            onClick={() => toast('Your progress is 55% complete! 🎯', { icon: '📈' })}
-            className="absolute left-[843px] top-[652px] z-20 flex h-[128px] w-[230px] cursor-pointer flex-col justify-between rounded-[20px] bg-white p-5 shadow-[0_16px_36px_rgba(7,18,67,0.12)] transition-shadow hover:shadow-[0_20px_42px_rgba(7,18,67,0.18)]"
-          >
-            <div>
-              <p className="text-[12px] font-medium text-[#6C7280]">Learning Progress</p>
-              <p className="mt-1 text-[36px] font-extrabold leading-none text-[#111318]">
-                55%
-              </p>
-            </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-[#EAECEF]">
-              <div className="h-full w-[55%] rounded-full bg-lime" />
+            <div className="animate-card-uiux">
+              <motion.img
+                src="/assets/hero_card_uiux_design.png"
+                alt="UI/UX Design - 200 Courses, 1000+ Students"
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  navigate('/courses')
+                  toast.success('200 UI/UX Design courses available')
+                }}
+                className="block h-auto w-[208px] rounded-[16px] drop-shadow-[0_16px_36px_rgba(7,18,67,0.16)] transition-all hover:drop-shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
+                draggable={false}
+              />
             </div>
           </motion.div>
 
-          {/* Card 3: Happy Students (x = 329px, y = 838px) */}
+          {/* Card 2: Learning Progress (x = 842px, y = 652px, w = 232px, h = 131px) */}
           <motion.div
-            initial={{ opacity: 0.9 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            whileHover={{ scale: 1.03, y: -2 }}
-            onClick={() => toast('Over 2,000+ students rated 4.5/5 stars! ⭐', { icon: '🎉' })}
-            className="absolute left-[329px] top-[838px] z-20 flex h-[118px] w-[256px] cursor-pointer flex-col justify-between rounded-[20px] bg-white p-4 shadow-[0_16px_36px_rgba(7,18,67,0.12)] transition-shadow hover:shadow-[0_20px_42px_rgba(7,18,67,0.18)]"
+            initial={{ opacity: 0, y: 25, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-[842px] top-[652px] z-20 cursor-pointer"
           >
-            <div>
-              <p className="text-[15px] font-bold text-[#111318]">Happy Students</p>
-              <div className="mt-0.5 flex items-center gap-1.5 text-[12px]">
-                <span className="font-bold text-[#111318]">4.5</span>
-                <span className="text-[#6C7280]">(240)</span>
-                <span className="text-[#FFB800]">★</span>
-              </div>
+            <div className="animate-card-progress">
+              <motion.img
+                src="/assets/hero_card_learning_progress.png"
+                alt="Learning Progress - 55%"
+                whileHover={{ scale: 1.04, y: -4 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => toast('Your progress is 55% complete! 🎯', { icon: '📈' })}
+                className="block h-auto w-[232px] rounded-[20px] drop-shadow-[0_16px_36px_rgba(7,18,67,0.16)] transition-all hover:drop-shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
+                draggable={false}
+              />
             </div>
-            <div className="flex items-center">
-              <img
-                src="/assets/target_avatars_row.png"
-                alt="Happy students avatars"
-                className="h-[38px] w-auto object-contain"
+          </motion.div>
+
+          {/* Card 3: Happy Students (x = 328px, y = 838px, w = 258px, h = 121px) */}
+          <motion.div
+            initial={{ opacity: 0, y: 25, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-[328px] top-[838px] z-20 cursor-pointer"
+          >
+            <div className="animate-card-students">
+              <motion.img
+                src="/assets/hero_card_happy_students.png"
+                alt="Happy Students - 4.5 (240) ★ - 2K+"
+                whileHover={{ scale: 1.04, y: -4 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => toast('Over 2,000+ students rated 4.5/5 stars! ⭐', { icon: '🎉' })}
+                className="block h-auto w-[258px] rounded-[20px] drop-shadow-[0_16px_36px_rgba(7,18,67,0.16)] transition-all hover:drop-shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
                 draggable={false}
               />
             </div>
@@ -258,6 +251,7 @@ export default function HomeHero() {
       {/* ========================================================
           MOBILE & TABLET RESPONSIVE VIEWPORT (< 1024px)
           Optimized for Android, iPhone, iPad & touch devices
+          Using the official Figma design components
           ======================================================== */}
       <div className="relative z-30 lg:hidden">
         <Header />
@@ -266,9 +260,9 @@ export default function HomeHero() {
       <div className="container-page relative z-10 flex flex-col items-center pb-16 pt-5 text-center sm:pt-8 lg:hidden">
         {/* Main Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl text-[32px] font-bold leading-[1.12] tracking-[-0.035em] sm:text-5xl md:text-6xl"
         >
           Get Access to Hundreds
@@ -277,84 +271,103 @@ export default function HomeHero() {
         </motion.h1>
 
         {/* Subtitle */}
-        <p className="mt-3.5 max-w-lg px-2 text-sm font-normal leading-relaxed text-white/85 sm:text-base md:max-w-xl">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-3.5 max-w-lg px-2 text-sm font-normal leading-relaxed text-white/85 sm:text-base md:max-w-xl"
+        >
           Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
-        </p>
+        </motion.p>
 
         {/* Search Bar (fully fluid for mobile) */}
-        <div className="mt-6 flex w-full max-w-[420px] justify-center px-1 sm:max-w-none sm:px-0">
+        <motion.div
+          initial={{ opacity: 0, y: 12, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-6 flex w-full max-w-[420px] justify-center px-1 sm:max-w-none sm:px-0"
+        >
           <SearchBar compact />
-        </div>
+        </motion.div>
 
-        {/* Central Visual Composition with Student & Lime Backdrop */}
-        <div className="relative mx-auto mt-8 w-full max-w-[320px] sm:mt-12 sm:max-w-[480px]">
-          {/* Lime Circle Backdrop */}
-          <div className="relative mx-auto aspect-square w-[240px] overflow-hidden rounded-full bg-lime sm:w-[330px] md:w-[360px]">
-            <img
-              src="/assets/student_cutout_clean.png"
+        {/* Central Visual Composition with Official Components */}
+        <div className="relative mx-auto mt-10 mb-4 w-full max-w-[340px] pb-10 sm:mt-14 sm:mb-8 sm:max-w-[460px] sm:pb-14">
+          {/* Lime Arch & Student */}
+          <div className="relative mx-auto w-[260px] sm:w-[360px]">
+            <motion.img
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              src="/assets/hero_lime_arch_official.png"
+              alt=""
+              className="w-full object-contain drop-shadow-[0_16px_50px_rgba(199,255,0,0.18)]"
+              draggable={false}
+            />
+            <motion.img
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              src="/assets/hero_student_official.png"
               alt="ByteSpace student learning online"
-              className="absolute bottom-0 left-1/2 w-[210px] -translate-x-1/2 object-contain sm:w-[290px] md:w-[320px]"
+              className="absolute bottom-0 left-1/2 w-[220px] -translate-x-1/2 object-contain sm:w-[300px]"
               draggable={false}
             />
           </div>
 
-          {/* Floating Card 1: UI/UX Design */}
+          {/* Official Floating Card 1: UI/UX Design */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.15 }}
-            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             onClick={() => {
               navigate('/courses')
               toast.success('200 UI/UX Design courses available')
             }}
-            className="absolute left-1 top-6 z-20 flex h-[54px] w-[140px] cursor-pointer flex-col justify-center rounded-[14px] bg-white px-3 py-1.5 text-left shadow-[0_12px_28px_rgba(7,18,67,0.18)] sm:-left-6 sm:top-10 sm:h-[66px] sm:w-[195px] sm:px-4"
+            className="absolute -left-1 top-1 z-20 w-[114px] cursor-pointer sm:-left-6 sm:top-4 sm:w-[155px]"
           >
-            <p className="text-[12px] font-bold text-[#111318] sm:text-[14px]">UI/UX Design</p>
-            <p className="text-[9px] font-medium text-[#6C7280] sm:text-[11px]">
-              200 Courses • 1k+ Students
-            </p>
-          </motion.div>
-
-          {/* Floating Card 2: Learning Progress */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            whileHover={{ scale: 1.03 }}
-            onClick={() => toast('Your progress is 55% complete! 🎯', { icon: '📈' })}
-            className="absolute right-1 top-12 z-20 flex h-[72px] w-[120px] cursor-pointer flex-col justify-between rounded-[16px] bg-white p-2.5 text-left shadow-[0_12px_28px_rgba(7,18,67,0.18)] sm:-right-6 sm:top-16 sm:h-[92px] sm:w-[160px] sm:p-3.5"
-          >
-            <div>
-              <p className="text-[9px] font-medium text-[#6C7280] sm:text-[11px]">Progress</p>
-              <p className="text-[18px] font-extrabold leading-none text-[#111318] sm:text-[24px]">55%</p>
-            </div>
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#EAECEF]">
-              <div className="h-full w-[55%] rounded-full bg-lime" />
-            </div>
-          </motion.div>
-
-          {/* Floating Card 3: Happy Students */}
-          <motion.div
-            initial={{ opacity: 0, y: 10, x: '-50%' }}
-            animate={{ opacity: 1, y: 0, x: '-50%' }}
-            transition={{ duration: 0.4, delay: 0.25 }}
-            whileHover={{ scale: 1.03, x: '-50%' }}
-            onClick={() => toast('Over 2,000+ students rated 4.5/5 stars! ⭐', { icon: '🎉' })}
-            className="absolute -bottom-2.5 left-1/2 z-20 flex w-[210px] cursor-pointer items-center justify-between rounded-[16px] bg-white px-3 py-2 shadow-[0_14px_32px_rgba(7,18,67,0.2)] sm:-bottom-4 sm:w-[250px] sm:px-4 sm:py-3"
-          >
-            <div className="text-left">
-              <p className="text-[12px] font-bold text-[#111318] sm:text-[13px]">Happy Students</p>
-              <div className="flex items-center gap-1 text-[10px] sm:text-[11px]">
-                <span className="font-bold text-[#111318]">4.5</span>
-                <span className="text-[#FFB800]">★</span>
-                <span className="text-[#6C7280]">(240)</span>
-              </div>
-            </div>
             <img
-              src="/assets/target_avatars_row.png"
-              alt="Happy students"
-              className="h-[24px] w-auto object-contain sm:h-[30px]"
+              src="/assets/hero_card_uiux_design.png"
+              alt="UI/UX Design"
+              className="w-full object-contain rounded-[12px] drop-shadow-[0_12px_28px_rgba(7,18,67,0.22)]"
+              draggable={false}
+            />
+          </motion.div>
+
+          {/* Official Floating Card 2: Learning Progress */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => toast('Your progress is 55% complete! 🎯', { icon: '📈' })}
+            className="absolute -right-1 top-4 z-20 w-[122px] cursor-pointer sm:-right-6 sm:top-8 sm:w-[160px]"
+          >
+            <img
+              src="/assets/hero_card_learning_progress.png"
+              alt="Learning Progress 55%"
+              className="w-full object-contain rounded-[14px] drop-shadow-[0_12px_28px_rgba(7,18,67,0.22)]"
+              draggable={false}
+            />
+          </motion.div>
+
+          {/* Official Floating Card 3: Happy Students */}
+          <motion.div
+            initial={{ opacity: 0, y: 15, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            transition={{ duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ scale: 1.04, x: '-50%' }}
+            whileTap={{ scale: 0.96, x: '-50%' }}
+            onClick={() => toast('Over 2,000+ students rated 4.5/5 stars! ⭐', { icon: '🎉' })}
+            className="absolute bottom-0 left-1/2 z-20 w-[165px] cursor-pointer sm:w-[215px]"
+          >
+            <img
+              src="/assets/hero_card_happy_students.png"
+              alt="Happy Students"
+              className="w-full object-contain rounded-[16px] drop-shadow-[0_14px_32px_rgba(7,18,67,0.24)]"
+              draggable={false}
             />
           </motion.div>
         </div>

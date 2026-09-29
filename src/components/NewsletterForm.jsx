@@ -22,23 +22,22 @@ export default function NewsletterForm({ buttonText = 'Search', className = '' }
 
   return (
     <div className={className}>
-      <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-2.5 sm:flex-row sm:gap-3">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <input
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="h-[46px] min-w-0 flex-1 rounded-full border border-black/15 bg-white px-5 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+          className="h-[48px] w-full sm:w-[270px] rounded-full border border-[#D1D5DB] bg-white px-5 text-[14px] text-[#111827] placeholder-[#6B7280] outline-none transition focus:border-black/40"
         />
-        <Button
+        <button
           type="submit"
-          variant="lime"
-          className="h-[46px] px-7 text-sm font-bold text-black"
+          className="h-[48px] shrink-0 rounded-full bg-[#d4fb20] px-8 text-[14px] font-semibold text-black transition-all hover:bg-[#c2ea1b] active:scale-[0.98]"
         >
           {buttonText}
-        </Button>
+        </button>
       </form>
-      <p className="mt-3.5 max-w-md text-[11px] leading-5 text-muted">
+      <p className="mt-3.5 max-w-[390px] text-[11.5px] leading-relaxed text-[#4B5563]">
         By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
       </p>
     </div>

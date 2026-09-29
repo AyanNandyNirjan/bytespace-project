@@ -33,16 +33,13 @@ export default function ByteSpaceLogo({
   }
 
   return (
-    <Link to="/" className={`inline-flex items-center gap-2.5 font-bold tracking-tight text-xl group select-none ${className}`}>
+    <Link to="/" className={`inline-flex items-center select-none group ${className}`}>
       <img
-        src="/assets/logo_icon_2x.png"
+        src="/assets/bytespace_logo_dark_transparent_4x.png"
         alt="ByteSpace"
-        className="h-7 w-auto shrink-0 object-contain transition-transform duration-200 group-hover:scale-105"
+        className="h-7 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
         draggable={false}
       />
-      <span className="text-[22px] font-bold tracking-[-0.03em] text-ink">
-        ByteSpace
-      </span>
     </Link>
   )
 }
