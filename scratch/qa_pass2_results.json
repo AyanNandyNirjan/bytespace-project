@@ -1,0 +1,122 @@
+[
+  {
+    "name": "home_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "home_full_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "login_1440",
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasHScroll": false
+  },
+  {
+    "name": "register_1440",
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "hasHScroll": false
+  },
+  {
+    "name": "courses_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "courses_full_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "creator_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "creator_full_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "details_about_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "details_about_full_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "details_lessons_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "details_reviews_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "notfound_1440",
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "hasHScroll": false
+  },
+  {
+    "name": "home_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  },
+  {
+    "name": "login_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  },
+  {
+    "name": "register_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  },
+  {
+    "name": "courses_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  },
+  {
+    "name": "creator_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  },
+  {
+    "name": "details_about_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  },
+  {
+    "name": "notfound_mobile_390",
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "hasHScroll": false
+  }
+]
