@@ -1,58 +1,103 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { Search01Icon, ArrowDown01Icon } from '@hugeicons/core-free-icons'
 
-export default function SearchBar({ compact = false }) {
+export default function SearchBar({ compact = false, variant = 'hero', onSearch }) {
   const navigate = useNavigate()
+  const [query, setQuery] = useState('')
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('Courses')
+
   const submit = e => {
     e.preventDefault()
-    const q = new FormData(e.currentTarget).get('search')
-    navigate('/courses')
+    const q = query.trim()
+    if (onSearch) {
+      onSearch(q)
+    } else {
+      navigate('/courses')
+    }
     toast.success(q ? `Searching for “${q}”` : 'Showing all courses')
   }
 
+  // Variant: Courses page header
+  if (variant === 'courses') {
+    return (
+      <form
+        onSubmit={submit}
+        className="relative flex w-full min-w-0 max-w-[480px] items-center justify-center gap-2 sm:gap-3"
+      >
+        {/* Search Input Pill */}
+        <div className="flex h-[46px] min-w-0 flex-1 items-center rounded-full bg-white px-4 shadow-[0_8px_25px_rgba(0,0,0,0.06)] transition-shadow duration-200 focus-within:shadow-[0_10px_30px_rgba(0,0,0,0.12)] sm:h-[50px] sm:px-5">
+          <HugeiconsIcon icon={Search01Icon} size={18} className="mr-2.5 text-[#8E95A2]" />
+          <input
+            name="search"
+            size="1"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search..."
+            className="w-full min-w-0 bg-transparent text-[14px] text-ink outline-none placeholder:text-[#8E95A2] sm:text-[15px]"
+          />
+        </div>
+
+        {/* Lime Dropdown Button */}
+        <div className="relative shrink-0">
+          <button
+            type="button"
+            onClick={() => setDropdownOpen(prev => !prev)}
+            className="flex h-[46px] items-center justify-center gap-1.5 rounded-full bg-lime px-4 text-xs font-bold text-black shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98] sm:h-[50px] sm:px-5 sm:text-[15px]"
+          >
+            <span>{selectedCategory}</span>
+            <HugeiconsIcon icon={ArrowDown01Icon} size={16} />
+          </button>
+
+          {dropdownOpen && (
+            <div className="absolute right-0 top-full z-50 mt-2 w-40 overflow-hidden rounded-2xl border border-gray-100 bg-white py-1 shadow-xl">
+              {['Courses', 'Creators', 'Lessons', 'Design', 'Business'].map(cat => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory(cat)
+                    setDropdownOpen(false)
+                    toast.success(`Filter: ${cat}`)
+                  }}
+                  className="block w-full px-4 py-2 text-left text-xs font-semibold text-ink hover:bg-lime/20"
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </form>
+    )
+  }
+
+  // Variant: Home Hero (compact mode)
   return (
     <form
       onSubmit={submit}
-      className={`mx-auto flex w-full items-center rounded-full bg-white shadow-[0_10px_35px_rgba(0,0,0,0.12)] transition-shadow duration-200 focus-within:shadow-[0_12px_40px_rgba(0,0,0,0.2)] ${
-        compact ? 'max-w-[490px] p-1.5 pl-4 sm:pl-5' : 'max-w-2xl p-1.5 pl-5'
-      }`}
+      className="flex w-full min-w-0 max-w-[580px] items-center justify-center gap-2 sm:gap-4"
     >
-      {/* Magnifying Glass Icon */}
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="#8E95A2"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="mr-3 shrink-0"
-      >
-        <circle cx="8.5" cy="8.5" r="5.5" />
-        <path d="M17.5 17.5l-4.5-4.5" />
-      </svg>
+      {/* Search Input Pill */}
+      <div className="flex h-[46px] min-w-0 flex-1 items-center rounded-full bg-white px-3 shadow-[0_8px_25px_rgba(0,0,0,0.06)] transition-shadow duration-200 focus-within:shadow-[0_10px_30px_rgba(0,0,0,0.12)] sm:h-[52px] sm:flex-initial sm:w-[458px] sm:px-5">
+        <HugeiconsIcon icon={Search01Icon} size={18} className="mr-2.5 text-[#8E95A2]" />
+        <input
+          name="search"
+          size="1"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Course, topic, creator"
+          className="w-full min-w-0 bg-transparent text-[13px] text-ink outline-none placeholder:text-[#8E95A2] sm:text-[16px]"
+        />
+      </div>
 
-      {/* Input */}
-      <input
-        name="search"
-        placeholder={compact ? 'Course, topic, creator' : 'Search courses, subjects, tutors...'}
-        className="w-full min-w-0 bg-transparent text-sm sm:text-base text-ink outline-none placeholder:text-[#8E95A2]"
-      />
-
-      {!compact && (
-        <select className="mr-2 hidden rounded-full bg-[#f2f4f7] px-4 py-2 text-xs font-semibold text-ink outline-none sm:block">
-          <option>All Categories</option>
-          <option>Design</option>
-          <option>Development</option>
-          <option>Business</option>
-        </select>
-      )}
-
-      {/* Search Button */}
+      {/* Separate Lime Pill Button */}
       <button
         type="submit"
-        className="shrink-0 rounded-full bg-lime px-6 sm:px-7 py-2.5 text-xs sm:text-sm font-bold text-ink transition-transform duration-150 hover:scale-[1.03] active:scale-[0.97]"
+        className="flex h-[44px] shrink-0 items-center justify-center rounded-full bg-lime px-4 text-xs font-bold text-black shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-transform duration-150 hover:scale-[1.03] active:scale-[0.97] sm:h-[50px] sm:w-[104px] sm:px-0 sm:text-[16px]"
       >
         Search
       </button>

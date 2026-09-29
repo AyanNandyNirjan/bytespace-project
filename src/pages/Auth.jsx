@@ -1,33 +1,238 @@
-import { motion } from 'framer-motion'
-import toast from 'react-hot-toast'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Logo from '../components/Logo'
+import toast from 'react-hot-toast'
+import AuthLayout from '../components/AuthLayout'
+import Button from '../components/Button'
 
-export default function Auth({mode}){
-  const register = mode==='register'
-  const navigate=useNavigate()
-  const submit=e=>{e.preventDefault();toast.success(register?'Account created successfully':'Welcome back to ByteSpace');setTimeout(()=>navigate('/'),450)}
-  return <div className="brand-grid min-h-screen bg-brand p-4 text-white sm:p-8 lg:p-12">
-    <div className="mx-auto grid min-h-[calc(100vh-32px)] max-w-[1600px] items-stretch gap-7 lg:grid-cols-[1.05fr_.95fr]">
-      <section className="relative hidden overflow-hidden rounded-[36px] lg:block">
-        <div className="absolute left-7 top-0"><Logo inverse compact/></div>
-        <div className="absolute left-7 top-28 max-w-xl"><h1 className="text-3xl font-extrabold">{register?'Sign up and come in':'Sign in with ease'}</h1><p className="mt-4 text-xl leading-8 text-white/85">{register?'The registration process is straightforward, uncomplicated, and efficient, allowing users to sign up quickly, easily, and at no cost':'Experience a seamless and efficient sign-in process that grants you instant access to a world of knowledge.'}</p></div>
-        <motion.img animate={{y:[0,-8,0]}} transition={{duration:5,repeat:Infinity}} src="/assets/auth-visual.jpg" alt="ByteSpace courses" className="absolute bottom-3 left-3 w-[86%] max-w-[780px] rounded-[28px] object-cover shadow-float"/>
-      </section>
-      <section className="flex items-center justify-center py-8">
-        <motion.form initial={{opacity:0,scale:.985}} animate={{opacity:1,scale:1}} onSubmit={submit} className="w-full max-w-[720px] rounded-[38px] bg-white px-7 py-10 text-ink shadow-float sm:px-14 sm:py-14 lg:px-20 lg:py-20">
-          <p className="text-xl font-medium text-brand">{register?'Create an Account':'Sign In'}</p>
-          <h2 className="mt-2 text-5xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">{register?'Welcome to ByteSpace':'Welcome Back'}</h2>
-          <div className="mt-10 space-y-7">
-            {register&&<label className="block"><span className="mb-2 block text-base font-medium">Full Name</span><input required placeholder="Jamie Davis" className="w-full rounded-2xl border border-black/15 px-5 py-4 text-lg outline-none focus:border-brand"/></label>}
-            <label className="block"><span className="mb-2 block text-base font-medium">Email</span><input required type="email" placeholder="designer@example.com" className="w-full rounded-2xl border border-black/15 px-5 py-4 text-lg outline-none focus:border-brand"/></label>
-            <label className="block"><span className="mb-2 block text-base font-medium">Password</span><input required type="password" placeholder="********" className="w-full rounded-2xl border border-black/15 px-5 py-4 text-lg outline-none focus:border-brand"/></label>
+export default function Auth({ mode = 'login' }) {
+  const isRegister = mode === 'register'
+  const navigate = useNavigate()
+
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if (isRegister && !fullName.trim()) {
+      toast.error('Please enter your full name')
+      return
+    }
+
+    const trimmedEmail = email.trim()
+    if (!trimmedEmail) {
+      toast.error('Please enter your email')
+      return
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      toast.error('Please enter a valid email address')
+      return
+    }
+
+    if (!password) {
+      toast.error('Please enter your password')
+      return
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters')
+      return
+    }
+
+    toast.success(
+      isRegister ? 'Account created successfully! Welcome to ByteSpace.' : 'Welcome back to ByteSpace!'
+    )
+    setTimeout(() => {
+      navigate('/')
+    }, 600)
+  }
+
+  const handleSocialAuth = provider => {
+    toast.success(`Signed in with ${provider}`)
+    setTimeout(() => navigate('/'), 600)
+  }
+
+  if (isRegister) {
+    return (
+      <AuthLayout
+        title="Sign up and come in"
+        subtitle="The registration process is straightforward, uncomplicated, and efficient, allowing users to sign up quickly, easily, and at no cost"
+      >
+        <div className="flex flex-col text-ink">
+          {/* Subtitle / Category */}
+          <p className="text-sm font-semibold text-brand">Create an Account</p>
+
+          {/* Heading */}
+          <h2 className="mt-1.5 text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">
+            Welcome to
+            <br />
+            ByteSpace
+          </h2>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="mt-7 flex flex-col space-y-4">
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={e => setFullName(e.target.value)}
+                placeholder="Jamie Davis"
+                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="designer@example.com"
+                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="********"
+                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+              />
+            </div>
+
+            {/* Lime Continue Button on Right */}
+            <div className="flex justify-end pt-3">
+              <Button
+                type="submit"
+                variant="lime"
+                className="h-11 px-8 text-sm font-bold text-black"
+              >
+                Continue
+              </Button>
+            </div>
+          </form>
+
+          {/* Bottom Switch Link */}
+          <p className="mt-8 text-center text-xs text-[#6B7280]">
+            Already have an account?{' '}
+            <Link to="/login" className="font-semibold text-brand hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
+      </AuthLayout>
+    )
+  }
+
+  // Login Mode
+  return (
+    <AuthLayout
+      title="Sign in with ease"
+      subtitle="Experience a seamless and efficient sign-in process that grants you instant access to a world of knowledge."
+    >
+      <div className="flex flex-col text-ink">
+        {/* Subtitle / Category */}
+        <p className="text-sm font-semibold text-brand">Sign In</p>
+
+        {/* Heading */}
+        <h2 className="mt-1.5 text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">
+          Welcome Back
+        </h2>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="mt-7 flex flex-col space-y-4">
+          <div>
+            <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="designer@example.com"
+              className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+            />
           </div>
-          <div className="mt-8 flex justify-end"><button className="lime-btn px-8 py-3 text-lg">{register?'Continue':'Sign In'}</button></div>
-          {!register&&<><div className="my-10 flex items-center gap-4 text-muted"><span className="h-px flex-1 bg-black/15"/><span>or</span><span className="h-px flex-1 bg-black/15"/></div><div className="flex justify-center gap-5"><button type="button" onClick={()=>toast('Facebook sign-in demo')} className="grid h-16 w-16 place-items-center rounded-2xl border border-black/15 text-3xl font-extrabold">f</button><button type="button" onClick={()=>toast('Google sign-in demo')} className="grid h-16 w-16 place-items-center rounded-2xl border border-black/15 text-3xl font-extrabold">G</button></div></>}
-          <p className={`${register?'mt-24':'mt-12'} text-center text-base text-muted`}>{register?'Already have an account? ':'New user? '}<Link className="text-brand" to={register?'/login':'/register'}>{register?'Login':'Create an account'}</Link></p>
-        </motion.form>
-      </section>
-    </div>
-  </div>
+
+          <div>
+            <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
+              Password
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="********"
+              className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+            />
+          </div>
+
+          {/* Lime Sign In Button on Right */}
+          <div className="flex justify-end pt-3">
+            <Button
+              type="submit"
+              variant="lime"
+              className="h-11 px-8 text-sm font-bold text-black"
+            >
+              Sign In
+            </Button>
+          </div>
+        </form>
+
+        {/* Divider with "or" */}
+        <div className="my-6 flex items-center">
+          <div className="flex-1 border-t border-gray-200" />
+          <span className="px-4 text-xs text-[#9CA3AF]">or</span>
+          <div className="flex-1 border-t border-gray-200" />
+        </div>
+
+        {/* Social Buttons */}
+        <div className="flex items-center justify-center gap-4">
+          {/* Facebook */}
+          <button
+            type="button"
+            onClick={() => handleSocialAuth('Facebook')}
+            className="flex h-13 w-13 items-center justify-center rounded-2xl border border-gray-200 p-3.5 transition-all hover:border-black/30 hover:bg-gray-50 active:scale-95"
+            aria-label="Sign in with Facebook"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </button>
+
+          {/* Google */}
+          <button
+            type="button"
+            onClick={() => handleSocialAuth('Google')}
+            className="flex h-13 w-13 items-center justify-center rounded-2xl border border-gray-200 p-3.5 transition-all hover:border-black/30 hover:bg-gray-50 active:scale-95"
+            aria-label="Sign in with Google"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.344-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Bottom Switch Link */}
+        <p className="mt-8 text-center text-xs text-[#6B7280]">
+          New user?{' '}
+          <Link to="/register" className="font-semibold text-brand hover:underline">
+            Create an account
+          </Link>
+        </p>
+      </div>
+    </AuthLayout>
+  )
 }
