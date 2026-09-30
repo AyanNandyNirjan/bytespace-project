@@ -4,8 +4,8 @@ export default function MotionSection({
   children,
   className = '',
   delay = 0,
-  yOffset = 24,
-  duration = 0.5,
+  yOffset = 12,
+  duration = 0.28,
   as: Component = 'section',
   ...props
 }) {
@@ -29,9 +29,9 @@ export default function MotionSection({
       transition={{
         duration,
         delay,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.16, 1, 0.3, 1]
       }}
-      className={className}
+      className={`transform-gpu ${className}`}
       {...props}
     >
       {children}

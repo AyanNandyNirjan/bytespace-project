@@ -21,6 +21,8 @@ import Button from '../components/Button'
 import BlueGridBackground from '../components/BlueGridBackground'
 import MotionSection from '../components/MotionSection'
 import AvatarStack from '../components/AvatarStack'
+import GrowthVisual from '../components/GrowthVisual'
+import ManageVisual from '../components/ManageVisual'
 import { categories, courses } from '../data'
 
 const pathCards = [
@@ -78,7 +80,7 @@ export default function Home() {
           {brandLogos.map((logo, i) => (
             <div
               key={i}
-              className="flex items-center justify-center opacity-85 transition-all duration-200 hover:opacity-100 hover:scale-105"
+              className="transform-gpu flex items-center justify-center opacity-80 transition-[opacity,transform] duration-150 ease-out hover:opacity-100 hover:scale-105"
             >
               <img
                 src={logo.src}
@@ -153,16 +155,17 @@ export default function Home() {
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 sm:gap-5">
             {pathCards.map(({ icon, label }) => (
               <motion.div
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -5, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 450, damping: 28, mass: 0.5 }}
                 onClick={() => {
                   navigate('/courses')
                   toast.success(`${label} learning path selected`)
                 }}
                 key={label}
-                className="group flex cursor-pointer flex-col items-center justify-center rounded-[22px] border border-[#E5E7EB] bg-white p-5 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all hover:border-black/20 hover:shadow-[0_12px_30px_rgba(7,18,67,0.08)] sm:py-7"
+                className="transform-gpu group flex cursor-pointer flex-col items-center justify-center rounded-[22px] border border-[#E5E7EB] bg-white p-5 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-[border-color,box-shadow] duration-200 hover:border-black/20 hover:shadow-[0_14px_36px_rgba(7,18,67,0.09)] sm:py-7"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-lime text-black shadow-sm transition-transform duration-200 group-hover:scale-110">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-lime text-black shadow-sm transition-transform duration-150 ease-out group-hover:scale-110">
                   <HugeiconsIcon icon={icon} size={24} />
                 </div>
                 <span className="mt-3.5 block text-sm font-bold text-ink sm:text-[15px]">
@@ -174,10 +177,28 @@ export default function Home() {
         </div>
       </MotionSection>
 
-      {/* 5. PROFESSIONAL GROWTH SECTION (With Student Visual & Overlays) */}
-      <MotionSection className="relative overflow-hidden bg-gradient-to-br from-[#FEFFE8]/50 via-white to-[#EBF0FF]/40 py-16 sm:py-20 lg:py-24">
-        <div className="container-page">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      {/* 5 & 6. PROFESSIONAL GROWTH & COURSE MANAGEMENT SHOWCASE */}
+      <section
+        className="relative overflow-x-clip py-14 sm:py-18 lg:py-20"
+        style={{
+          background: `
+            radial-gradient(ellipse 65% 50% at 85% 12%, rgba(212, 255, 0, 0.22) 0%, rgba(212, 255, 0, 0.05) 50%, transparent 75%),
+            radial-gradient(ellipse 55% 45% at 5% 40%, rgba(59, 130, 246, 0.10) 0%, transparent 65%),
+            radial-gradient(ellipse 60% 50% at 10% 88%, rgba(212, 255, 0, 0.26) 0%, rgba(212, 255, 0, 0.06) 55%, transparent 80%),
+            radial-gradient(ellipse 55% 45% at 92% 92%, rgba(96, 165, 250, 0.14) 0%, transparent 70%),
+            #ffffff
+          `
+        }}
+      >
+        {/* Soft Ambient Glow Orbs for Luminous Depth */}
+        <div className="pointer-events-none absolute -top-16 right-4 h-[550px] w-[550px] rounded-full bg-[#D4FF00]/18 blur-[140px] lg:right-16" />
+        <div className="pointer-events-none absolute top-[36%] -left-28 h-[450px] w-[450px] rounded-full bg-[#3B82F6]/10 blur-[130px]" />
+        <div className="pointer-events-none absolute bottom-4 -left-16 h-[520px] w-[520px] rounded-full bg-[#D4FF00]/22 blur-[140px]" />
+        <div className="pointer-events-none absolute -bottom-10 right-4 h-[480px] w-[480px] rounded-full bg-[#60A5FA]/14 blur-[130px]" />
+
+        <div className="container-page relative z-10 space-y-12 sm:space-y-14 lg:space-y-16">
+          {/* Part A: Professional Growth */}
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             {/* Left Content */}
             <div className="max-w-xl">
               <h2 className="text-3xl font-extrabold leading-tight tracking-[-0.035em] text-ink sm:text-4xl lg:text-[44px]">
@@ -185,52 +206,38 @@ export default function Home() {
                 <br />
                 Growth Starts Here!
               </h2>
-              <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base sm:leading-7">
+              <p className="mt-5 text-sm leading-relaxed text-[#4B5563] sm:text-base sm:leading-7">
                 Explore our curated selection of courses tailored to enhance your capabilities and accelerate your career journey. Whether you are looking to sharpen specific skills, gain industry expertise, or embark on a new career path entirely, we have the resources you need.
               </p>
 
               {/* Stats Numbers */}
               <div className="mt-8 flex flex-wrap gap-8 sm:gap-12">
                 <div>
-                  <b className="text-3xl font-extrabold text-brand sm:text-4xl">12K</b>
-                  <p className="mt-1 text-xs font-semibold text-muted sm:text-sm">Students</p>
+                  <b className="text-3xl font-extrabold text-[#0A43E6] sm:text-4xl">12K</b>
+                  <p className="mt-1 text-xs font-semibold text-[#4B5563] sm:text-sm">Students</p>
                 </div>
                 <div>
-                  <b className="text-3xl font-extrabold text-brand sm:text-4xl">70+</b>
-                  <p className="mt-1 text-xs font-semibold text-muted sm:text-sm">Courses</p>
+                  <b className="text-3xl font-extrabold text-[#0A43E6] sm:text-4xl">70+</b>
+                  <p className="mt-1 text-xs font-semibold text-[#4B5563] sm:text-sm">Courses</p>
                 </div>
                 <div>
-                  <b className="text-3xl font-extrabold text-brand sm:text-4xl">16</b>
-                  <p className="mt-1 text-xs font-semibold text-muted sm:text-sm">Creators</p>
+                  <b className="text-3xl font-extrabold text-[#0A43E6] sm:text-4xl">16</b>
+                  <p className="mt-1 text-xs font-semibold text-[#4B5563] sm:text-sm">Creators</p>
                 </div>
               </div>
             </div>
 
-            {/* Right Visual Art */}
-            <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center select-none lg:mx-0">
-              <img
-                src="/assets/feature_growth_composite.png"
-                alt="Your Path to Professional Growth Starts Here"
-                className="relative z-10 w-full max-w-[430px] object-contain drop-shadow-[0_20px_40px_rgba(7,18,67,0.10)] transition-transform duration-300 hover:scale-[1.02]"
-                draggable={false}
-              />
+            {/* Right Visual Art with Individual Components */}
+            <div className="relative mx-auto flex w-full max-w-[480px] items-center justify-center select-none lg:mx-0">
+              <GrowthVisual />
             </div>
           </div>
-        </div>
-      </MotionSection>
 
-      {/* 6. CREATE & MANAGE COURSES EASILY SECTION */}
-      <MotionSection className="relative overflow-hidden bg-gradient-to-tr from-[#FEFFE8]/40 via-white to-[#EBF0FF]/40 py-16 sm:py-20 lg:py-24">
-        <div className="container-page">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left Visual: Creator with Tablet & UI Overlays */}
-            <div className="relative order-2 mx-auto flex w-full max-w-[460px] items-center justify-center select-none lg:order-1 lg:mx-0">
-              <img
-                src="/assets/feature_manage_composite.png"
-                alt="Create & Manage Courses Easily"
-                className="relative z-10 w-full max-w-[420px] object-contain drop-shadow-[0_20px_40px_rgba(7,18,67,0.10)] transition-transform duration-300 hover:scale-[1.02]"
-                draggable={false}
-              />
+          {/* Part B: Create & Manage Courses Easily */}
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Left Visual: Creator with Tablet & UI Overlays with Individual Components */}
+            <div className="relative order-2 mx-auto flex w-full max-w-[480px] items-center justify-center select-none lg:order-1 lg:mx-0">
+              <ManageVisual />
             </div>
 
             {/* Right Text */}
@@ -240,8 +247,8 @@ export default function Home() {
                 <br />
                 Courses Easily.
               </h2>
-              <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base sm:leading-7">
-                ByteSpace supports individuals or entities in the creation, publication, and administration of educational courses.
+              <p className="mt-5 text-sm leading-relaxed text-[#4B5563] sm:text-base sm:leading-7">
+                <strong className="font-bold text-ink">ByteSpace</strong> supports individuals or entities in the creation, publication, and administration of educational courses.
               </p>
 
               {/* Bullet Points with Blue Circle Checkmarks */}
@@ -253,41 +260,41 @@ export default function Home() {
                   'Build a Community'
                 ].map(item => (
                   <div key={item} className="flex items-center gap-3">
-                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1B59F8] text-white sm:h-6 sm:w-6 shadow-sm">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0A43E6] text-white sm:h-6 sm:w-6 shadow-sm">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
-                    <span className="text-sm font-semibold text-ink sm:text-[15px]">{item}</span>
+                    <span className="text-sm font-semibold text-[#111827] sm:text-[15px]">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </MotionSection>
+      </section>
 
       {/* 7. CREATOR CTA BLUE GRID SECTION */}
-      <BlueGridBackground className="py-20 text-center sm:py-24 lg:py-28">
+      <BlueGridBackground className="py-16 text-center sm:py-20 lg:py-24">
         <BrandShapes />
-        <div className="container-page relative z-10 mx-auto max-w-3xl">
-          <h2 className="text-3xl font-extrabold tracking-[-0.035em] sm:text-4xl lg:text-[48px] lg:leading-[1.15]">
+        <div className="container-page relative z-20 mx-auto max-w-3xl">
+          <h2 className="text-2xl font-extrabold tracking-[-0.035em] text-white sm:text-3xl md:text-4xl lg:text-[42px] lg:leading-[1.18]">
             Unlock Your Potential as a
             <br />
             Creator with ByteSpace
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base sm:leading-7">
-            ByteSpace provides the ultimate platform to showcase your expertise and earn from your knowledge. Join a thriving community of creators and take full control of your courses, students, and revenue.
+          <p className="mx-auto mt-4 max-w-2xl text-xs font-normal leading-relaxed text-white/90 sm:mt-5 sm:text-sm sm:leading-relaxed lg:text-[14.5px] lg:leading-[1.65]">
+            Experience the collaboration of numerous creators and an expanding selection of courses. Register now and become a part of a community comprising over 10,000 local and international creators. Utilize our Course Editor, and showcase your expertise by publishing your finest course on the ByteSpace Course Library.
           </p>
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-6 sm:mt-8">
             <Button
               type="button"
               variant="lime"
               onClick={() => {
                 navigate('/creator/purepearl-studio')
-                toast.success('Creator onboarding opened')
+                toast.success('Creator onboarding opened! 🚀')
               }}
-              className="h-12 px-9 text-base font-bold text-black"
+              className="h-10 px-7 text-xs font-bold text-black sm:h-11 sm:px-8 sm:text-sm"
             >
               Join as Creator
             </Button>
@@ -356,9 +363,9 @@ export default function Home() {
             ].map(({ avatar, avatar2x, name, role, quote }) => (
               <motion.div
                 whileHover={{ y: -5 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ type: 'spring', stiffness: 450, damping: 28, mass: 0.5 }}
                 key={name}
-                className="flex flex-col justify-between rounded-[28px] border border-gray-100/90 bg-white p-7 shadow-[0_16px_40px_rgba(7,18,67,0.06)] sm:rounded-[32px] sm:p-8"
+                className="transform-gpu flex flex-col justify-between rounded-[22px] border border-[#E5E7EB] bg-white p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-[border-color,box-shadow] duration-200 hover:border-black/20 hover:shadow-[0_14px_36px_rgba(7,18,67,0.09)]"
               >
                 <div>
                   <img

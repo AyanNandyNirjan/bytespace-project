@@ -160,6 +160,12 @@ img { display: block; max-width: 100%; }
   will-change: transform;
 }
 
+.animate-card-uiux:hover,
+.animate-card-progress:hover,
+.animate-card-students:hover {
+  animation-play-state: paused;
+}
+
 .shimmer-bar {
   background: linear-gradient(90deg, #c7ff00 0%, #e5ff80 50%, #c7ff00 100%);
   background-size: 200% 100%;

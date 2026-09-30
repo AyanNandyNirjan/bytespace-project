@@ -74,7 +74,7 @@ export default function CourseLessons() {
         <p className="mt-3 text-xs leading-relaxed text-[#4B5563] sm:text-sm sm:leading-7">
           Witness your growth as you complete lessons, with an intuitive progress tracking feature guiding you through your learning journey.
         </p>
-        <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 shadow-sm">
+        <div className="mt-5 rounded-[22px] border border-[#E5E7EB] bg-white p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-[border-color,box-shadow] duration-200 hover:border-black/20 hover:shadow-[0_14px_36px_rgba(7,18,67,0.09)]">
           <span className="text-xs font-semibold text-muted">Learning Progress</span>
           <div className="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">55%</div>
           <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-gray-100">

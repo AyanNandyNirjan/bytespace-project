@@ -75,23 +75,29 @@ export default function Navbar() {
           </Link>
 
           {/* Shopping Bag Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
             onClick={() => toast('Your cart is currently empty', { icon: '🛍️' })}
             aria-label="Shopping Cart"
-            className="flex h-10 w-10 items-center justify-center rounded-full text-white/95 transition-opacity hover:opacity-80 active:scale-95"
+            className="transform-gpu flex h-10 w-10 items-center justify-center rounded-full text-white/95 transition-opacity duration-150 hover:opacity-80"
           >
             <HugeiconsIcon icon={ShoppingBag01Icon} size={22} />
-          </button>
+          </motion.button>
 
           {/* Mobile Hamburger Toggle Button (< md) */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
             onClick={() => setMobileMenuOpen(prev => !prev)}
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
             aria-expanded={mobileMenuOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 active:scale-95 md:hidden"
+            className="transform-gpu flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-150 hover:bg-white/20 md:hidden"
           >
             <HugeiconsIcon icon={mobileMenuOpen ? Cancel01Icon : Menu01Icon} size={22} />
-          </button>
+          </motion.button>
         </div>
       </div>
 
@@ -104,6 +110,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
               onClick={() => setMobileMenuOpen(false)}
               className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
             />
@@ -113,7 +120,7 @@ export default function Navbar() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 380, mass: 0.7 }}
               className="fixed bottom-0 right-0 top-0 z-50 flex w-[82%] max-w-[340px] flex-col justify-between bg-[#002FB6] p-6 text-white shadow-2xl md:hidden"
             >
               <div>

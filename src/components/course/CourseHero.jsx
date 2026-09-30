@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
@@ -44,7 +45,7 @@ export default function CourseHero({
               by{' '}
               <Link
                 to={`/creator/${creatorSlug}`}
-                className="font-semibold text-lime hover:underline"
+                className="font-semibold text-lime transition-opacity hover:opacity-80"
               >
                 {creatorName}
               </Link>
@@ -72,14 +73,17 @@ export default function CourseHero({
           </div>
 
           {/* Share Button (Lime Pill) */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-2 self-start rounded-full bg-lime px-5 py-2 text-xs font-bold text-black transition-all hover:brightness-105 active:scale-95 shadow-sm sm:px-6 sm:py-2.5 sm:text-sm"
+            className="transform-gpu inline-flex items-center gap-2 self-start rounded-full bg-lime px-5 py-2 text-xs font-bold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105 sm:px-6 sm:py-2.5 sm:text-sm"
           >
             <HugeiconsIcon icon={Share01Icon} size={16} />
             Share
-          </button>
+          </motion.button>
         </div>
 
         {/* Video Preview and Floating Sidebar Row */}

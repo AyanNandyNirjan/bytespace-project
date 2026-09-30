@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 export default function ReviewCard({
   name,
   role,
@@ -7,7 +9,11 @@ export default function ReviewCard({
   rating = 5
 }) {
   return (
-    <article className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 shadow-sm transition-shadow hover:shadow-md">
+    <motion.article
+      whileHover={{ y: -5 }}
+      transition={{ type: 'spring', stiffness: 450, damping: 28, mass: 0.5 }}
+      className="transform-gpu rounded-[22px] border border-[#E5E7EB] bg-white p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-[border-color,box-shadow] duration-200 hover:border-black/20 hover:shadow-[0_14px_36px_rgba(7,18,67,0.09)]"
+    >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
           <img
@@ -30,6 +36,7 @@ export default function ReviewCard({
       <p className="mt-3 text-xs leading-relaxed text-[#4B5563] sm:text-sm sm:leading-6">
         {text}
       </p>
-    </article>
+    </motion.article>
   )
 }
+

@@ -184,67 +184,85 @@ export default function HomeHero() {
               Smooth GPU-Accelerated Floating & Tactile Micro-Interactions
               ======================================================== */}
           {/* Card 1: UI/UX Design (x = 404px, y = 640px, w = 208px, h = 70px) */}
-          <motion.div
-            initial={{ opacity: 0, y: 25, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-[404px] top-[640px] z-20 cursor-pointer"
-          >
+          <div className="absolute left-[404px] top-[640px] z-20">
             <div className="animate-card-uiux">
-              <motion.img
-                src="/assets/hero_card_uiux_design.png"
-                alt="UI/UX Design - 200 Courses, 1000+ Students"
-                whileHover={{ scale: 1.05, y: -4 }}
+              <motion.div
+                initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.35, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.025,
+                  transition: { type: 'spring', stiffness: 450, damping: 26, mass: 0.5 }
+                }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => {
                   navigate('/courses')
                   toast.success('200 UI/UX Design courses available')
                 }}
-                className="block h-auto w-[208px] rounded-[16px] drop-shadow-[0_16px_36px_rgba(7,18,67,0.16)] transition-all hover:drop-shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
-                draggable={false}
-              />
+                className="transform-gpu will-change-transform cursor-pointer rounded-[16px] shadow-[0_16px_36px_rgba(7,18,67,0.18)] transition-shadow duration-200 hover:shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
+              >
+                <img
+                  src="/assets/hero_card_uiux_design.png"
+                  alt="UI/UX Design - 200 Courses, 1000+ Students"
+                  className="block h-auto w-[208px] rounded-[16px] select-none"
+                  draggable={false}
+                />
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Card 2: Learning Progress (x = 842px, y = 652px, w = 232px, h = 131px) */}
-          <motion.div
-            initial={{ opacity: 0, y: 25, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-[842px] top-[652px] z-20 cursor-pointer"
-          >
+          <div className="absolute left-[842px] top-[652px] z-20">
             <div className="animate-card-progress">
-              <motion.img
-                src="/assets/hero_card_learning_progress.png"
-                alt="Learning Progress - 55%"
-                whileHover={{ scale: 1.04, y: -4 }}
+              <motion.div
+                initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.35, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.025,
+                  transition: { type: 'spring', stiffness: 450, damping: 26, mass: 0.5 }
+                }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => toast('Your progress is 55% complete! 🎯', { icon: '📈' })}
-                className="block h-auto w-[232px] rounded-[20px] drop-shadow-[0_16px_36px_rgba(7,18,67,0.16)] transition-all hover:drop-shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
-                draggable={false}
-              />
+                className="transform-gpu will-change-transform cursor-pointer rounded-[20px] shadow-[0_16px_36px_rgba(7,18,67,0.18)] transition-shadow duration-200 hover:shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
+              >
+                <img
+                  src="/assets/hero_card_learning_progress.png"
+                  alt="Learning Progress - 55%"
+                  className="block h-auto w-[232px] rounded-[20px] select-none"
+                  draggable={false}
+                />
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Card 3: Happy Students (x = 328px, y = 838px, w = 258px, h = 121px) */}
-          <motion.div
-            initial={{ opacity: 0, y: 25, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-[328px] top-[838px] z-20 cursor-pointer"
-          >
+          <div className="absolute left-[328px] top-[838px] z-20">
             <div className="animate-card-students">
-              <motion.img
-                src="/assets/hero_card_happy_students.png"
-                alt="Happy Students - 4.5 (240) ★ - 2K+"
-                whileHover={{ scale: 1.04, y: -4 }}
+              <motion.div
+                initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.35, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.025,
+                  transition: { type: 'spring', stiffness: 450, damping: 26, mass: 0.5 }
+                }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => toast('Over 2,000+ students rated 4.5/5 stars! ⭐', { icon: '🎉' })}
-                className="block h-auto w-[258px] rounded-[20px] drop-shadow-[0_16px_36px_rgba(7,18,67,0.16)] transition-all hover:drop-shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
-                draggable={false}
-              />
+                className="transform-gpu will-change-transform cursor-pointer rounded-[20px] shadow-[0_16px_36px_rgba(7,18,67,0.18)] transition-shadow duration-200 hover:shadow-[0_24px_48px_rgba(7,18,67,0.26)]"
+              >
+                <img
+                  src="/assets/hero_card_happy_students.png"
+                  alt="Happy Students - 4.5 (240) ★ - 2K+"
+                  className="block h-auto w-[258px] rounded-[20px] select-none"
+                  draggable={false}
+                />
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -316,57 +334,70 @@ export default function HomeHero() {
 
           {/* Official Floating Card 1: UI/UX Design */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.3, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{
+              y: -4,
+              scale: 1.025,
+              transition: { type: 'spring', stiffness: 450, damping: 26, mass: 0.5 }
+            }}
             whileTap={{ scale: 0.96 }}
             onClick={() => {
               navigate('/courses')
               toast.success('200 UI/UX Design courses available')
             }}
-            className="absolute -left-1 top-1 z-20 w-[114px] cursor-pointer sm:-left-6 sm:top-4 sm:w-[155px]"
+            className="transform-gpu will-change-transform absolute -left-1 top-1 z-20 w-[114px] cursor-pointer rounded-[12px] shadow-[0_12px_28px_rgba(7,18,67,0.18)] transition-shadow duration-200 hover:shadow-[0_16px_36px_rgba(7,18,67,0.26)] sm:-left-6 sm:top-4 sm:w-[155px]"
           >
             <img
               src="/assets/hero_card_uiux_design.png"
               alt="UI/UX Design"
-              className="w-full object-contain rounded-[12px] drop-shadow-[0_12px_28px_rgba(7,18,67,0.22)]"
+              className="w-full object-contain rounded-[12px] select-none"
               draggable={false}
             />
           </motion.div>
 
           {/* Official Floating Card 2: Learning Progress */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.3, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{
+              y: -4,
+              scale: 1.025,
+              transition: { type: 'spring', stiffness: 450, damping: 26, mass: 0.5 }
+            }}
             whileTap={{ scale: 0.96 }}
             onClick={() => toast('Your progress is 55% complete! 🎯', { icon: '📈' })}
-            className="absolute -right-1 top-4 z-20 w-[122px] cursor-pointer sm:-right-6 sm:top-8 sm:w-[160px]"
+            className="transform-gpu will-change-transform absolute -right-1 top-4 z-20 w-[122px] cursor-pointer rounded-[14px] shadow-[0_12px_28px_rgba(7,18,67,0.18)] transition-shadow duration-200 hover:shadow-[0_16px_36px_rgba(7,18,67,0.26)] sm:-right-6 sm:top-8 sm:w-[160px]"
           >
             <img
               src="/assets/hero_card_learning_progress.png"
               alt="Learning Progress 55%"
-              className="w-full object-contain rounded-[14px] drop-shadow-[0_12px_28px_rgba(7,18,67,0.22)]"
+              className="w-full object-contain rounded-[14px] select-none"
               draggable={false}
             />
           </motion.div>
 
           {/* Official Floating Card 3: Happy Students */}
           <motion.div
-            initial={{ opacity: 0, y: 15, x: '-50%' }}
+            initial={{ opacity: 0, y: 10, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
-            transition={{ duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ scale: 1.04, x: '-50%' }}
+            transition={{ duration: 0.3, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{
+              y: -4,
+              scale: 1.025,
+              x: '-50%',
+              transition: { type: 'spring', stiffness: 450, damping: 26, mass: 0.5 }
+            }}
             whileTap={{ scale: 0.96, x: '-50%' }}
             onClick={() => toast('Over 2,000+ students rated 4.5/5 stars! ⭐', { icon: '🎉' })}
-            className="absolute bottom-0 left-1/2 z-20 w-[165px] cursor-pointer sm:w-[215px]"
+            className="transform-gpu will-change-transform absolute bottom-0 left-1/2 z-20 w-[165px] cursor-pointer rounded-[16px] shadow-[0_14px_32px_rgba(7,18,67,0.20)] transition-shadow duration-200 hover:shadow-[0_18px_40px_rgba(7,18,67,0.28)] sm:w-[215px]"
           >
             <img
               src="/assets/hero_card_happy_students.png"
               alt="Happy Students"
-              className="w-full object-contain rounded-[16px] drop-shadow-[0_14px_32px_rgba(7,18,67,0.24)]"
+              className="w-full object-contain rounded-[16px] select-none"
               draggable={false}
             />
           </motion.div>

@@ -11,10 +11,12 @@ export default function FilterChip({
   return (
     <motion.button
       type="button"
+      whileHover={{ scale: 1.025 }}
       whileTap={{ scale: 0.97 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
       onClick={onClick}
-      className={`inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-2 text-xs sm:text-sm font-medium text-[#374151] transition-all hover:border-black/20 hover:bg-gray-50 ${
-        active ? 'border-brand text-brand' : ''
+      className={`transform-gpu inline-flex select-none items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-2 text-xs sm:text-sm font-medium text-[#374151] transition-[border-color,background-color,color,box-shadow] duration-150 hover:border-black/20 hover:bg-gray-50 ${
+        active ? 'border-brand text-brand shadow-sm' : ''
       } ${className}`}
     >
       {icon && <span className="text-[#6B7280]">{icon}</span>}
