@@ -25,18 +25,20 @@ export default function CourseCard({ course, dense = false }) {
             className="transform-gpu h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
             draggable={false}
           />
-          {/* Metadata Overlay Badges on Image */}
-          <div className="absolute inset-x-2.5 bottom-2.5 flex items-center justify-between gap-1 text-[10px] font-medium text-white sm:text-[11px]">
-            <span className="rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
-              {lessonsCount}
-            </span>
-            <span className="rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
-              {duration}
-            </span>
-            <span className="rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
-              {commentsCount}
-            </span>
-          </div>
+          {/* Metadata Overlay Badges on Image (only if explicitly overridden) */}
+          {(course.lessonsCount || course.duration || course.commentsCount) && (
+            <div className="absolute inset-x-2.5 bottom-2.5 flex items-center justify-between gap-1 text-[10px] font-medium text-white sm:text-[11px]">
+              <span className="rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
+                {lessonsCount}
+              </span>
+              <span className="rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
+                {duration}
+              </span>
+              <span className="rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
+                {commentsCount}
+              </span>
+            </div>
+          )}
         </Link>
 
         {/* Card Body */}
