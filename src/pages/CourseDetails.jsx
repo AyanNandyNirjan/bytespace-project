@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import Footer from '../components/Footer'
 import CourseHero from '../components/course/CourseHero'
 import CourseEnrollmentSidebar from '../components/course/CourseEnrollmentSidebar'
@@ -30,9 +31,20 @@ export default function CourseDetails({ tab = 'about' }) {
             <div className="w-full">
               <CourseTabs slug={currentSlug} />
               <div className="mt-8">
-                {tab === 'about' && <CourseAbout />}
-                {tab === 'lessons' && <CourseLessons />}
-                {tab === 'reviews' && <CourseReviews />}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={tab}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                    className="transform-gpu"
+                  >
+                    {tab === 'about' && <CourseAbout />}
+                    {tab === 'lessons' && <CourseLessons />}
+                    {tab === 'reviews' && <CourseReviews />}
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
 

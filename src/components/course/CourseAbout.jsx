@@ -51,7 +51,7 @@ export default function CourseAbout() {
               <img
                 src={item.src}
                 alt={item.alt}
-                className="aspect-[1.35/1] w-full object-cover transition-transform duration-300 hover:scale-105"
+                className="aspect-[1.35/1] w-full object-cover transition-transform duration-200 ease-out hover:scale-105"
               />
             </div>
           ))}

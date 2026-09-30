@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
-import Button from './Button'
 
 export default function NewsletterForm({ buttonText = 'Search', className = '' }) {
   const [email, setEmail] = useState('')
@@ -16,28 +16,31 @@ export default function NewsletterForm({ buttonText = 'Search', className = '' }
       toast.error('Please enter a valid email address')
       return
     }
-    toast.success('Thanks for subscribing to ByteSpace!')
+    toast.success('Thanks for subscribing to ByteSpace! 📬')
     setEmail('')
   }
 
   return (
     <div className={className}>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3.5">
         <input
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="h-[48px] w-full sm:w-[270px] rounded-full border border-[#D1D5DB] bg-white px-5 text-[14px] text-[#111827] placeholder-[#6B7280] outline-none transition focus:border-black/40"
+          className="h-11 sm:h-[44px] w-full sm:w-[280px] md:w-[300px] rounded-full border border-[#D1D5DB] bg-white px-5 text-xs sm:text-[13.5px] text-[#111827] placeholder-[#6B7280] outline-none transition-[border-color,box-shadow] duration-150 focus:border-black/50 focus:ring-2 focus:ring-black/5"
         />
-        <button
+        <motion.button
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
           type="submit"
-          className="h-[48px] shrink-0 rounded-full bg-[#d4fb20] px-8 text-[14px] font-semibold text-black transition-all hover:bg-[#c2ea1b] active:scale-[0.98]"
+          className="transform-gpu h-11 sm:h-[44px] shrink-0 select-none rounded-full bg-lime px-7 text-xs sm:text-[13.5px] font-semibold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105"
         >
           {buttonText}
-        </button>
+        </motion.button>
       </form>
-      <p className="mt-3.5 max-w-[390px] text-[11.5px] leading-relaxed text-[#4B5563]">
+      <p className="mt-3.5 max-w-[400px] text-[10.5px] sm:text-[11px] leading-[1.6] text-[#4B5563]">
         By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
       </p>
     </div>

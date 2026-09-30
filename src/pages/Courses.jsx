@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -32,7 +33,7 @@ export default function Courses() {
       {/* ========================================================
           BLUE GRID HEADER
           ======================================================== */}
-      <section className="brand-grid relative overflow-hidden text-white">
+      <section className="brand-grid relative z-20 text-white">
         <Navbar />
         <div className="container-page pb-12 pt-6 text-center sm:pb-16 sm:pt-10">
           <h1 className="text-3xl font-extrabold tracking-[-0.035em] sm:text-4xl lg:text-[46px]">
@@ -78,7 +79,10 @@ export default function Courses() {
           {/* Pagination */}
           <div className="mt-12 flex items-center justify-center gap-3 text-sm sm:mt-16 sm:gap-4">
             {/* Previous Page */}
-            <button
+            <motion.button
+              whileHover={currentPage > 1 ? { scale: 1.08 } : undefined}
+              whileTap={currentPage > 1 ? { scale: 0.94 } : undefined}
+              transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
               type="button"
               onClick={() => {
                 if (currentPage > 1) {
@@ -88,34 +92,40 @@ export default function Courses() {
               }}
               disabled={currentPage === 1}
               aria-label="Previous Page"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-sm font-semibold text-gray-500 transition-all hover:border-black/30 hover:text-black disabled:opacity-40"
+              className="transform-gpu flex h-10 w-10 select-none items-center justify-center rounded-full border border-gray-200 text-sm font-semibold text-gray-500 transition-[border-color,color] duration-150 hover:border-black/30 hover:text-black disabled:opacity-40 disabled:hover:border-gray-200 disabled:hover:text-gray-500"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
-            </button>
+            </motion.button>
 
             {/* Page Numbers */}
             {[1, 2, 3, 4, 5].map(n => (
-              <button
+              <motion.button
                 key={n}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
                 type="button"
                 onClick={() => {
                   setCurrentPage(n)
                   window.scrollTo({ top: 300, behavior: 'smooth' })
                 }}
-                className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-all ${
+                className={`transform-gpu flex h-9 w-9 select-none items-center justify-center rounded-full text-sm font-semibold transition-[background-color,color] duration-150 ${
                   currentPage === n
-                    ? 'font-bold text-black'
-                    : 'text-[#6B7280] hover:text-black'
+                    ? 'bg-black font-bold text-white shadow-sm'
+                    : 'text-[#6B7280] hover:bg-gray-100 hover:text-black'
                 }`}
               >
                 {n}
-              </button>
+              </motion.button>
             ))}
 
             {/* Next Page */}
-            <button
+            <motion.button
+              whileHover={currentPage < 5 ? { scale: 1.08 } : undefined}
+              whileTap={currentPage < 5 ? { scale: 0.94 } : undefined}
+              transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
               type="button"
               onClick={() => {
                 if (currentPage < 5) {
@@ -125,12 +135,12 @@ export default function Courses() {
               }}
               disabled={currentPage === 5}
               aria-label="Next Page"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-sm font-semibold text-gray-500 transition-all hover:border-black/30 hover:text-black disabled:opacity-40"
+              className="transform-gpu flex h-10 w-10 select-none items-center justify-center rounded-full border border-gray-200 text-sm font-semibold text-gray-500 transition-[border-color,color] duration-150 hover:border-black/30 hover:text-black disabled:opacity-40 disabled:hover:border-gray-200 disabled:hover:text-gray-500"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
-            </button>
+            </motion.button>
           </div>
         </div>
       </main>

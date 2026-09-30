@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
@@ -28,7 +29,7 @@ export default function CourseEnrollmentSidebar({
   ]
 
   return (
-    <aside className="w-full rounded-[28px] border border-gray-200/90 bg-white p-6 sm:p-7 shadow-[0_16px_40px_rgba(7,18,67,0.08)]">
+    <aside className="w-full rounded-[22px] border border-[#E5E7EB] bg-white p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
       {/* Lessons Heading */}
       <h3 className="text-lg font-extrabold tracking-[-0.03em] text-ink sm:text-xl">
         {lessonCount}
@@ -58,13 +59,16 @@ export default function CourseEnrollmentSidebar({
       </div>
 
       {/* Enroll Button */}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.025 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
         type="button"
         onClick={() => toast.success('Enrolled successfully! Enjoy the course.')}
-        className="mt-4 w-full rounded-full bg-lime py-3 text-center text-sm font-bold text-black transition-all hover:brightness-105 active:scale-98 shadow-sm"
+        className="transform-gpu mt-4 w-full rounded-full bg-lime py-3 text-center text-sm font-bold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105"
       >
         Enroll Now
-      </button>
+      </motion.button>
 
       {/* Features Included */}
       <h4 className="mt-7 text-sm font-extrabold text-ink sm:text-base">

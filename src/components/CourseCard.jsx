@@ -9,9 +9,9 @@ export default function CourseCard({ course, dense = false }) {
 
   return (
     <motion.article
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex flex-col justify-between overflow-hidden rounded-[22px] border border-[#E5E7EB] bg-white p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:border-black/20 hover:shadow-[0_12px_32px_rgba(7,18,67,0.08)]"
+      whileHover={{ y: -5 }}
+      transition={{ type: 'spring', stiffness: 450, damping: 28, mass: 0.5 }}
+      className="transform-gpu group flex flex-col justify-between overflow-hidden rounded-[22px] border border-[#E5E7EB] bg-white p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-[border-color,box-shadow] duration-200 hover:border-black/20 hover:shadow-[0_14px_36px_rgba(7,18,67,0.09)]"
     >
       <div>
         {/* Course Thumbnail with Bottom Floating Badges */}
@@ -22,7 +22,7 @@ export default function CourseCard({ course, dense = false }) {
           <img
             src={course.image}
             alt={course.title}
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            className="transform-gpu h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
             draggable={false}
           />
           {/* Metadata Overlay Badges on Image */}

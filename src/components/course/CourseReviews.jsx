@@ -68,7 +68,7 @@ export default function CourseReviews() {
                 setActiveFilter(f)
                 toast.success(`Filter: ${f}`)
               }}
-              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-150 ${
                 activeFilter === f
                   ? 'bg-lime text-black shadow-sm'
                   : 'bg-[#F3F4F6] text-[#4B5563] hover:bg-gray-200 hover:text-ink'

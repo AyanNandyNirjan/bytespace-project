@@ -12,7 +12,7 @@ export default function ByteSpaceLogo({
         <img
           src="/assets/logo_icon_2x.png"
           alt="ByteSpace"
-          className="h-8 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+          className="transform-gpu h-8 w-auto object-contain transition-transform duration-150 ease-out group-hover:scale-105"
           draggable={false}
         />
       </Link>
@@ -25,7 +25,7 @@ export default function ByteSpaceLogo({
         <img
           src="/assets/bytespace_logo_target_2x.png"
           alt="ByteSpace"
-          className="w-[170px] h-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+          className="transform-gpu w-[170px] h-auto object-contain transition-transform duration-150 ease-out group-hover:scale-[1.02]"
           draggable={false}
         />
       </Link>
@@ -37,7 +37,7 @@ export default function ByteSpaceLogo({
       <img
         src="/assets/bytespace_logo_dark_transparent_4x.png"
         alt="ByteSpace"
-        className="h-7 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+        className="transform-gpu h-7 w-auto object-contain transition-transform duration-150 ease-out group-hover:scale-105"
         draggable={false}
       />
     </Link>

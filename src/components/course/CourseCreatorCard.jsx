@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 export default function CourseCreatorCard({
   name = 'PurePearl Studio',
@@ -23,12 +24,20 @@ export default function CourseCreatorCard({
       <p className="mt-3.5 text-xs leading-relaxed text-muted">
         {tagline}
       </p>
-      <Link
-        to={`/creator/${slug}`}
-        className="mt-4 inline-block rounded-full border border-gray-300 px-5 py-2 text-xs font-semibold text-ink transition-colors hover:border-black/40 hover:bg-gray-50 active:scale-95"
+      <motion.div
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
+        className="mt-4 inline-block transform-gpu"
       >
-        See Full Profile
-      </Link>
+        <Link
+          to={`/creator/${slug}`}
+          className="inline-block rounded-full border border-gray-300 px-5 py-2 text-xs font-semibold text-ink transition-[background-color,border-color] duration-150 hover:border-black/40 hover:bg-gray-50"
+        >
+          See Full Profile
+        </Link>
+      </motion.div>
     </div>
   )
 }
+

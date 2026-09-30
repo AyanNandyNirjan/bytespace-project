@@ -9,7 +9,7 @@ export default function RatingSummary({
   ]
 }) {
   return (
-    <div className="grid gap-6 rounded-2xl border border-gray-200 bg-white p-5 sm:grid-cols-[140px_1fr] sm:items-center sm:p-7 shadow-sm">
+    <div className="grid gap-6 rounded-[22px] border border-[#E5E7EB] bg-white p-5 sm:grid-cols-[140px_1fr] sm:items-center sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
       {/* Left Lime Rating Badge */}
       <div className="flex flex-col items-center justify-center rounded-2xl bg-lime p-5 text-center shadow-sm">
         <p className="text-xs font-bold text-black">Ratings</p>

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 
 export default function CourseVideoPreview({
@@ -9,15 +10,20 @@ export default function CourseVideoPreview({
       <img
         src={thumbnail}
         alt={alt}
-        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-101"
+        className="transform-gpu h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
       />
       <button
         type="button"
         onClick={() => toast.success('Playing course introduction preview...')}
         aria-label="Play course video"
-        className="absolute inset-0 flex items-center justify-center bg-black/5 transition-colors hover:bg-black/15"
+        className="absolute inset-0 flex items-center justify-center bg-black/5 transition-colors duration-200 hover:bg-black/15"
       >
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-black/40 backdrop-blur-md shadow-2xl transition-transform group-hover:scale-110 sm:h-20 sm:w-20">
+        <motion.div
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+          className="transform-gpu flex h-16 w-16 items-center justify-center rounded-2xl bg-black/40 backdrop-blur-md shadow-2xl sm:h-20 sm:w-20"
+        >
           <div className="ml-1 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md sm:h-12 sm:w-12">
             <svg
               width="18"
@@ -29,8 +35,9 @@ export default function CourseVideoPreview({
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
           </div>
-        </div>
+        </motion.div>
       </button>
     </div>
   )
 }
+
