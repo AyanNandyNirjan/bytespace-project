@@ -17,7 +17,7 @@ export default function CourseCard({ course, dense = false }) {
         {/* Course Thumbnail with Bottom Floating Badges */}
         <Link
           to="/course/build-digital-asset"
-          className="relative block aspect-[1.85/1] w-full overflow-hidden rounded-[16px] bg-[#EAECEF]"
+          className="relative block aspect-[1.85/1] w-full overflow-hidden rounded-[16px] bg-transparent isolate"
         >
           <img
             src={course.image}
@@ -81,7 +81,7 @@ export default function CourseCard({ course, dense = false }) {
       </div>
 
       {/* Price */}
-      <div className="mt-4 border-t border-gray-100 pt-3">
+      <div className="mt-4 pt-1">
         <p className="text-[17px] font-extrabold text-brand">
           {course.price || '$25'}
           <span className="ml-1 text-xs font-normal text-muted">/lifetime</span>

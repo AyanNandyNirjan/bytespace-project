@@ -34,11 +34,21 @@ export default function CourseDetails({ tab = 'about' }) {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={tab}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                    className="transform-gpu"
+                    initial={{ opacity: 0, filter: 'blur(8px)', y: 6 }}
+                    animate={{
+                      opacity: 1,
+                      filter: 'blur(0px)',
+                      y: 0,
+                      transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
+                      transitionEnd: { filter: 'none', transform: 'none' }
+                    }}
+                    exit={{
+                      opacity: 0,
+                      filter: 'blur(8px)',
+                      y: -6,
+                      transition: { duration: 0.16, ease: [0.32, 0, 0.67, 0] }
+                    }}
+                    className="transform-gpu will-change-[transform,opacity,filter]"
                   >
                     {tab === 'about' && <CourseAbout />}
                     {tab === 'lessons' && <CourseLessons />}

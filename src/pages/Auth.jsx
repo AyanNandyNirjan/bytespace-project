@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import AuthLayout from '../components/AuthLayout'
-import Button from '../components/Button'
 
 export default function Auth({ mode = 'login' }) {
   const isRegister = mode === 'register'
@@ -61,74 +59,73 @@ export default function Auth({ mode = 'login' }) {
         title="Sign up and come in"
         subtitle="The registration process is straightforward, uncomplicated, and efficient, allowing users to sign up quickly, easily, and at no cost"
       >
-        <div className="flex flex-col text-ink">
-          {/* Subtitle / Category */}
-          <p className="text-sm font-semibold text-brand">Create an Account</p>
+        <div className="flex flex-1 flex-col justify-between">
+          <div>
+            {/* Category / Subtitle */}
+            <p className="text-[13px] font-medium text-[#0047FF]">Create an Account</p>
 
-          {/* Heading */}
-          <h2 className="mt-1.5 text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">
-            Welcome to
-            <br />
-            ByteSpace
-          </h2>
+            {/* Heading */}
+            <h2 className="mt-1 text-[32px] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
+              Welcome to<br />ByteSpace
+            </h2>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="mt-7 flex flex-col space-y-4">
-            <div>
-              <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
-                Full Name
-              </label>
-              <input
-                type="text"
-                value={fullName}
-                onChange={e => setFullName(e.target.value)}
-                placeholder="Jamie Davis"
-                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-              />
-            </div>
+            {/* Registration Form */}
+            <form onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-3">
+              <div>
+                <label className="mb-1 block text-[12px] font-medium text-[#374151]">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={e => setFullName(e.target.value)}
+                  placeholder="Jamie Davis"
+                  className="h-[38px] w-full rounded-xl border border-[#E5E7EB] px-3.5 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#0047FF] focus:ring-1 focus:ring-[#0047FF]"
+                />
+              </div>
 
-            <div>
-              <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="designer@example.com"
-                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-              />
-            </div>
+              <div>
+                <label className="mb-1 block text-[12px] font-medium text-[#374151]">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="designer@example.com"
+                  className="h-[38px] w-full rounded-xl border border-[#E5E7EB] px-3.5 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#0047FF] focus:ring-1 focus:ring-[#0047FF]"
+                />
+              </div>
 
-            <div>
-              <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
-                Password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="********"
-                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-              />
-            </div>
+              <div>
+                <label className="mb-1 block text-[12px] font-medium text-[#374151]">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="********"
+                  className="h-[38px] w-full rounded-xl border border-[#E5E7EB] px-3.5 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#0047FF] focus:ring-1 focus:ring-[#0047FF]"
+                />
+              </div>
 
-            {/* Lime Continue Button on Right */}
-            <div className="flex justify-end pt-3">
-              <Button
-                type="submit"
-                variant="lime"
-                className="h-11 px-8 text-sm font-bold text-black"
-              >
-                Continue
-              </Button>
-            </div>
-          </form>
+              {/* Continue Pill Button on Right */}
+              <div className="flex justify-end pt-2">
+                <button
+                  type="submit"
+                  className="flex h-[32px] w-[87px] items-center justify-center rounded-full bg-[#D2FF00] text-[13px] font-medium text-black transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Continue
+                </button>
+              </div>
+            </form>
+          </div>
 
-          {/* Bottom Switch Link */}
-          <p className="mt-8 text-center text-xs text-[#6B7280]">
+          {/* Footer Switch Link */}
+          <p className="mt-auto pt-6 text-center text-[12px] text-[#6B7280]">
             Already have an account?{' '}
-            <Link to="/login" className="font-semibold text-brand hover:underline">
+            <Link to="/login" className="font-medium text-[#0047FF] hover:underline">
               Login
             </Link>
           </p>
@@ -143,99 +140,98 @@ export default function Auth({ mode = 'login' }) {
       title="Sign in with ease"
       subtitle="Experience a seamless and efficient sign-in process that grants you instant access to a world of knowledge."
     >
-      <div className="flex flex-col text-ink">
-        {/* Subtitle / Category */}
-        <p className="text-sm font-semibold text-brand">Sign In</p>
+      <div className="flex flex-1 flex-col justify-between">
+        <div>
+          {/* Category / Subtitle */}
+          <p className="text-[13px] font-medium text-[#0047FF]">Sign In</p>
 
-        {/* Heading */}
-        <h2 className="mt-1.5 text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">
-          Welcome Back
-        </h2>
+          {/* Heading */}
+          <h2 className="mt-1 text-[32px] font-bold leading-[1.12] tracking-[-0.03em] text-[#111827]">
+            Welcome Back
+          </h2>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="mt-7 flex flex-col space-y-4">
-          <div>
-            <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
-              Email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="designer@example.com"
-              className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-            />
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-3">
+            <div>
+              <label className="mb-1 block text-[12px] font-medium text-[#374151]">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="designer@example.com"
+                className="h-[38px] w-full rounded-xl border border-[#E5E7EB] px-3.5 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#0047FF] focus:ring-1 focus:ring-[#0047FF]"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-[12px] font-medium text-[#374151]">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="********"
+                className="h-[38px] w-full rounded-xl border border-[#E5E7EB] px-3.5 text-[13px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#0047FF] focus:ring-1 focus:ring-[#0047FF]"
+              />
+            </div>
+
+            {/* Sign In Pill Button on Right */}
+            <div className="flex justify-end pt-2">
+              <button
+                type="submit"
+                className="flex h-[32px] w-[74px] items-center justify-center rounded-full bg-[#D2FF00] text-[13px] font-medium text-black transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
+
+          {/* Divider with "or" */}
+          <div className="mt-6 mb-5 flex items-center">
+            <div className="flex-1 border-t border-[#E5E7EB]" />
+            <span className="px-3.5 text-[12px] text-[#9CA3AF]">or</span>
+            <div className="flex-1 border-t border-[#E5E7EB]" />
           </div>
 
-          <div>
-            <label className="mb-1.5 block text-xs font-semibold text-[#374151]">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="********"
-              className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-            />
-          </div>
-
-          {/* Lime Sign In Button on Right */}
-          <div className="flex justify-end pt-3">
-            <Button
-              type="submit"
-              variant="lime"
-              className="h-11 px-8 text-sm font-bold text-black"
+          {/* Social Buttons */}
+          <div className="flex items-center justify-center gap-4">
+            {/* Facebook */}
+            <button
+              type="button"
+              onClick={() => handleSocialAuth('Facebook')}
+              aria-label="Sign in with Facebook"
+              className="flex h-[48px] w-[48px] items-center justify-center rounded-[16px] border border-[#E5E7EB] bg-white transition hover:bg-gray-50 hover:border-gray-300"
             >
-              Sign In
-            </Button>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="12" fill="black" />
+                <path
+                  d="M15.117 12l.608-3.966h-3.805V5.467c0-1.087.533-2.146 2.239-2.146h1.733V.01a21.137 21.137 0 0 0-3.076-.264c-3.139 0-5.19 1.902-5.19 5.348v2.94H4.15v3.966h3.476v9.593c.698.11 1.411.167 2.138.167.727 0 1.44-.057 2.138-.167V12h3.215z"
+                  fill="white"
+                />
+              </svg>
+            </button>
+
+            {/* Google */}
+            <button
+              type="button"
+              onClick={() => handleSocialAuth('Google')}
+              aria-label="Sign in with Google"
+              className="flex h-[48px] w-[48px] items-center justify-center rounded-[16px] border border-[#E5E7EB] bg-white transition hover:bg-gray-50 hover:border-gray-300"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="black">
+                <path d="M21.35 11.1h-9.17v2.98h5.36c-.46 2.15-2.34 3.73-4.86 3.73-2.91 0-5.27-2.36-5.27-5.27s2.36-5.27 5.27-5.27c1.27 0 2.43.45 3.34 1.2l2.25-2.25C16.89 4.8 14.7 4 12.18 4 7.66 4 4 7.66 4 12.18s3.66 8.18 8.18 8.18c4.73 0 7.87-3.32 7.87-8.01 0-.6-.06-1.1-.18-1.55z" />
+              </svg>
+            </button>
           </div>
-        </form>
-
-        {/* Divider with "or" */}
-        <div className="my-6 flex items-center">
-          <div className="flex-1 border-t border-gray-200" />
-          <span className="px-4 text-xs text-[#9CA3AF]">or</span>
-          <div className="flex-1 border-t border-gray-200" />
         </div>
 
-        {/* Social Buttons */}
-        <div className="flex items-center justify-center gap-4">
-          {/* Facebook */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.94 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
-            type="button"
-            onClick={() => handleSocialAuth('Facebook')}
-            className="transform-gpu flex h-[52px] w-[52px] items-center justify-center rounded-2xl border border-gray-200 p-3.5 transition-[border-color,background-color,box-shadow] duration-150 hover:border-black/30 hover:bg-gray-50 hover:shadow-sm"
-            aria-label="Sign in with Facebook"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-            </svg>
-          </motion.button>
-
-          {/* Google */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.94 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
-            type="button"
-            onClick={() => handleSocialAuth('Google')}
-            className="transform-gpu flex h-[52px] w-[52px] items-center justify-center rounded-2xl border border-gray-200 p-3.5 transition-[border-color,background-color,box-shadow] duration-150 hover:border-black/30 hover:bg-gray-50 hover:shadow-sm"
-            aria-label="Sign in with Google"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.344-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z" />
-            </svg>
-          </motion.button>
-        </div>
-
-        {/* Bottom Switch Link */}
-        <p className="mt-8 text-center text-xs text-[#6B7280]">
+        {/* Footer Switch Link */}
+        <p className="mt-auto pt-6 text-center text-[12px] text-[#6B7280]">
           New user?{' '}
-          <Link to="/register" className="font-semibold text-brand hover:underline">
+          <Link to="/register" className="font-medium text-[#0047FF] hover:underline">
             Create an account
           </Link>
         </p>

@@ -31,17 +31,50 @@ export default function App() {
       ? 'creator-page'
       : location.pathname
 
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: 8,
+      scale: 0.99,
+    },
+    animate: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.35,
+        ease: [0.22, 1, 0.36, 1],
+      },
+      transitionEnd: {
+        filter: 'none',
+        transform: 'none',
+      },
+    },
+    exit: {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: -8,
+      scale: 0.99,
+      transition: {
+        duration: 0.2,
+        ease: [0.32, 0, 0.67, 0],
+      },
+    },
+  }
+
   return (
     <>
       <ScrollToTop />
       <AnimatePresence mode="wait">
         <motion.div
           key={pageGroupKey}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="transform-gpu will-change-transform min-h-screen"
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="transform-gpu will-change-[transform,opacity,filter] min-h-screen"
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />
