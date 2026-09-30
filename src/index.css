@@ -104,17 +104,17 @@ img { display: block; max-width: 100%; }
 
 @keyframes float-card-uiux {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -7px, 0); }
+  50% { transform: translate3d(0, -9px, 0); }
 }
 
 @keyframes float-card-progress {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, 8px, 0); }
+  50% { transform: translate3d(0, 9px, 0); }
 }
 
 @keyframes float-card-students {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -6px, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
 }
 
 @keyframes progress-shimmer {
@@ -148,22 +148,16 @@ img { display: block; max-width: 100%; }
 }
 
 .animate-card-uiux {
-  animation: float-card-uiux 5.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: float-card-uiux 2.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   will-change: transform;
 }
 .animate-card-progress {
-  animation: float-card-progress 6.0s cubic-bezier(0.45, 0, 0.55, 1) infinite -1.8s;
+  animation: float-card-progress 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite -0.8s;
   will-change: transform;
 }
 .animate-card-students {
-  animation: float-card-students 5.6s cubic-bezier(0.45, 0, 0.55, 1) infinite -3.4s;
+  animation: float-card-students 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite -1.4s;
   will-change: transform;
-}
-
-.animate-card-uiux:hover,
-.animate-card-progress:hover,
-.animate-card-students:hover {
-  animation-play-state: paused;
 }
 
 .shimmer-bar {
