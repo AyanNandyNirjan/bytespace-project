@@ -34,9 +34,9 @@ export default function App() {
   const pageVariants = {
     initial: {
       opacity: 0,
-      filter: 'blur(12px)',
-      y: 8,
-      scale: 0.99,
+      filter: 'blur(6px)',
+      y: 6,
+      scale: 0.995,
     },
     animate: {
       opacity: 1,
@@ -44,7 +44,7 @@ export default function App() {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.35,
+        duration: 0.3,
         ease: [0.22, 1, 0.36, 1],
       },
       transitionEnd: {
@@ -54,11 +54,11 @@ export default function App() {
     },
     exit: {
       opacity: 0,
-      filter: 'blur(12px)',
-      y: -8,
-      scale: 0.99,
+      filter: 'blur(6px)',
+      y: -6,
+      scale: 0.995,
       transition: {
-        duration: 0.2,
+        duration: 0.18,
         ease: [0.32, 0, 0.67, 0],
       },
     },

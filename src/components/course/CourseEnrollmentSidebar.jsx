@@ -36,15 +36,21 @@ export default function CourseEnrollmentSidebar({
       </h3>
 
       {/* Lesson Previews List */}
-      <div className="mt-5 space-y-3.5 text-xs sm:text-sm">
+      <div className="mt-5 space-y-1.5 text-xs sm:text-sm">
         {previewLessons.map(item => (
-          <div key={item.num} className="grid grid-cols-[24px_1fr_auto] items-center gap-2">
-            <span className="font-semibold text-gray-500">{item.num}</span>
-            <span className="font-medium text-ink leading-snug">{item.title}</span>
-            <span className="font-semibold text-brand">{item.duration}</span>
+          <div
+            key={item.num}
+            onClick={() => toast(`Previewing ${item.title} (${item.duration})`, { icon: '🎬' })}
+            className="group -mx-2.5 flex cursor-pointer items-center justify-between gap-2 rounded-xl px-2.5 py-2 transition-[background-color,color] duration-150 hover:bg-gray-50"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="font-semibold text-gray-400 transition-colors duration-150 group-hover:text-brand">{item.num}</span>
+              <span className="font-medium text-ink leading-snug truncate transition-colors duration-150 group-hover:text-brand">{item.title}</span>
+            </div>
+            <span className="shrink-0 font-semibold text-brand text-xs">{item.duration}</span>
           </div>
         ))}
-        <p className="pt-1 text-xs text-muted">99 more videos</p>
+        <p className="px-1 pt-1 text-xs text-muted">99 more videos</p>
       </div>
 
       {/* Dive-in Prompt */}
@@ -65,7 +71,7 @@ export default function CourseEnrollmentSidebar({
         transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
         type="button"
         onClick={() => toast.success('Enrolled successfully! Enjoy the course.')}
-        className="transform-gpu mt-4 w-full rounded-full bg-lime py-3 text-center text-sm font-bold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105"
+        className="transform-gpu mt-4 w-full rounded-full bg-lime py-3 text-center text-sm font-bold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105 hover:shadow-[0_8px_24px_rgba(212,255,0,0.35)]"
       >
         Enroll Now
       </motion.button>

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 export default function RatingSummary({
   score = '4.7',
   breakdown = [
@@ -18,17 +20,20 @@ export default function RatingSummary({
 
       {/* Right Bars Breakdown */}
       <div className="space-y-2.5">
-        {breakdown.map(row => (
+        {breakdown.map((row, i) => (
           <div key={row.stars} className="flex items-center gap-3 text-xs sm:text-sm">
             <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-100">
-              <div
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: `${row.pct}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 className="h-full rounded-full bg-lime"
-                style={{ width: `${row.pct}%` }}
               />
             </div>
             <div className="flex items-center text-black">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className="text-xs">★</span>
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <span key={idx} className="text-xs">★</span>
               ))}
             </div>
             <span className="w-8 text-right font-medium text-gray-500">{row.count}</span>

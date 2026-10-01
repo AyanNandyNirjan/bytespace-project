@@ -38,7 +38,7 @@ export default function Footer() {
                   <li key={item}>
                     <Link
                       to={item === 'Become a Creator' ? '/creator/purepearl-studio' : '/courses'}
-                      className="inline-block whitespace-nowrap transition-colors duration-150 hover:text-black"
+                      className="inline-block whitespace-nowrap transition-[color,transform] duration-150 hover:text-black hover:translate-x-1"
                     >
                       {item}
                     </Link>
