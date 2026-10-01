@@ -26,8 +26,10 @@ export default function Navbar() {
   }, [mobileMenuOpen])
 
   const navClass = ({ isActive }) =>
-    `transition-colors duration-150 hover:text-white ${
-      isActive ? 'font-medium text-white' : 'font-normal text-white/90'
+    `relative py-1 transition-colors duration-200 hover:text-white after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:rounded-full after:bg-lime after:transition-all after:duration-200 ${
+      isActive
+        ? 'font-medium text-white after:w-full'
+        : 'font-normal text-white/90 after:w-0 hover:after:w-full'
     }`
 
   const mobileNavClass = ({ isActive }) =>
@@ -63,13 +65,13 @@ export default function Navbar() {
           {/* Desktop Sign In / Join Us */}
           <Link
             to="/login"
-            className="hidden font-normal text-white/90 transition-colors hover:text-white md:block"
+            className="relative hidden py-1 font-normal text-white/90 transition-colors duration-200 hover:text-white after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:rounded-full after:bg-lime after:transition-all after:duration-200 hover:after:w-full md:block"
           >
             Sign In
           </Link>
           <Link
             to="/register"
-            className="hidden font-normal text-white/90 transition-colors hover:text-white md:block"
+            className="relative hidden py-1 font-normal text-white/90 transition-colors duration-200 hover:text-white after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:rounded-full after:bg-lime after:transition-all after:duration-200 hover:after:w-full md:block"
           >
             Join Us
           </Link>

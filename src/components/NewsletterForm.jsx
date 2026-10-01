@@ -35,7 +35,7 @@ export default function NewsletterForm({ buttonText = 'Search', className = '' }
           whileTap={{ scale: 0.96 }}
           transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
           type="submit"
-          className="transform-gpu h-11 sm:h-[44px] shrink-0 select-none rounded-full bg-lime px-7 text-xs sm:text-[13.5px] font-semibold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105"
+          className="transform-gpu h-11 sm:h-[44px] shrink-0 select-none rounded-full bg-lime px-7 text-xs sm:text-[13.5px] font-semibold text-black shadow-sm transition-[filter,box-shadow] duration-150 hover:brightness-105 hover:shadow-[0_4px_16px_rgba(212,255,0,0.35)]"
         >
           {buttonText}
         </motion.button>

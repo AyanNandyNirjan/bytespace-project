@@ -9,15 +9,29 @@ const springHover = { type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }
 
 export default function HomeHero() {
   const navigate = useNavigate()
-  const [scale, setScale] = useState(1)
+  const [scale, setScale] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      if (w >= 1024) {
+        const scaleW = w / 1440
+        const scaleH = h / 1024
+        return Math.min(scaleW, scaleH, 1.15)
+      }
+    }
+    return 1
+  })
 
   useEffect(() => {
     const handleResize = () => {
       const w = window.innerWidth
-      if (w >= 1440) {
-        setScale(1)
-      } else if (w >= 1024) {
-        setScale(w / 1440)
+      const h = window.innerHeight
+      if (w >= 1024) {
+        // Dynamically scale based on both width and height so hero section fits fully within viewport
+        const scaleW = w / 1440
+        const scaleH = h / 1024
+        const computedScale = Math.min(scaleW, scaleH, 1.15)
+        setScale(computedScale)
       } else {
         setScale(1)
       }
@@ -31,12 +45,13 @@ export default function HomeHero() {
     <section className="brand-grid relative w-full overflow-hidden text-white">
       {/* ========================================================
           DESKTOP & LAPTOP VIEWPORT (>= 1024px)
-          Dynamically scales to fit laptops (1024px - 1440px)
-          and remains 100% pixel-perfect at >= 1440px
+          Dynamically scales to fit both width & height so the entire
+          hero section (header, text, student, cards, shapes)
+          is 100% fully visible on load without vertical cutoff
           ======================================================== */}
       <div
         className="relative mx-auto hidden w-full overflow-hidden lg:block"
-        style={{ height: `${1024 * scale}px` }}
+        style={{ height: `${Math.floor(1024 * scale)}px` }}
       >
         <div
           className="absolute left-1/2 top-0 h-[1024px] w-[1440px]"
@@ -93,6 +108,9 @@ export default function HomeHero() {
             <img
               src="/assets/hero_lime_arch_official.png"
               alt=""
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="block h-auto w-full object-contain drop-shadow-[0_20px_60px_rgba(199,255,0,0.2)]"
               draggable={false}
             />
@@ -108,6 +126,9 @@ export default function HomeHero() {
             <img
               src="/assets/hero_student_official.png"
               alt="ByteSpace student learning online"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="block h-auto w-full object-contain"
               draggable={false}
             />
@@ -320,6 +341,9 @@ export default function HomeHero() {
               transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               src="/assets/hero_lime_arch_official.png"
               alt=""
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="w-full object-contain drop-shadow-[0_16px_50px_rgba(199,255,0,0.18)]"
               draggable={false}
             />
@@ -329,6 +353,9 @@ export default function HomeHero() {
               transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               src="/assets/hero_student_official.png"
               alt="ByteSpace student learning online"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="absolute bottom-0 left-1/2 w-[220px] -translate-x-1/2 object-contain sm:w-[300px]"
               draggable={false}
             />
